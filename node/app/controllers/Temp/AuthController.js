@@ -1,0 +1,70 @@
+const Responses = require("newsfeed-web-models").Responses;
+const BaseController = require("../BaseController");
+
+const userService = require("newsfeed-services").userService;
+
+const { logger } = require("../common");
+const { Temp } = require("newsfeed-models").Schemas;
+const { AllowAnonymous, RoutePrefix, Route } = require("newsfeed-routing");
+
+const _debug = logger.extend("auth");
+const LogInSchema = Temp.LogInSchema;
+
+@RoutePrefix("/api/temp/auth")
+class AuthController extends BaseController {
+  constructor() {
+    super("AuthController");
+  }
+
+  @AllowAnonymous()
+  @Route("GET", "login/:id(\\d+)/:userName/:role")
+  logInGet(req, res, next) {
+    let user = {
+      userId: req.params.id,
+      userName: req.params.userName + "@dispostable.com",
+      roles: [req.params.role, "User", "Super", "Content Manager"],
+      tenantId: "Acme Node Corp UId"
+    };
+    userService.logIn(res, user);
+    _debug("User Authenticated");
+    let sResponse = new Responses.SuccessResponse();
+    res.status("200").json(sResponse);
+  }
+
+  @AllowAnonymous()
+  @Route("POST", "login", LogInSchema)
+  logInByBody(req, res, next) {
+    let user = {
+      userId: req.body.id,
+      userName: req.body.userName,
+      roles: [req.body.roles]
+    };
+    userService.logIn(res, user);
+    _debug("User Athenticated");
+    let sResponse = new Responses.ItemResponse(user);
+
+    res.status("200").json(sResponse);
+  }
+
+  @Route("GET", "logout")
+  logout(req, res, next) {
+    userService.logOut(res);
+    let sResponse = new Responses.SuccessResponse();
+    res.status("200").json(sResponse);
+  }
+
+  @Route("GET", "current")
+  getCurrentUser(req, res, next) {
+    let sResponse = new Responses.ItemResponse(req.user);
+    res.status("200").json(sResponse);
+  }
+
+  @Route("POST", "current")
+  getCurrentUserPost(req, res, next) {
+    // for post request
+    let sResponse = new Responses.ItemResponse(req.user);
+    res.status("200").json(sResponse);
+  }
+}
+
+module.exports = { controller: AuthController };

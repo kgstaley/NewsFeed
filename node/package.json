@@ -29,6 +29,7 @@
   "author": "Kerry Staley",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "body-parser": "^1.18.3",
     "braces": "^2.3.2",
     "chalk": "^2.4.2",
@@ -62,7 +63,7 @@
     "babel-code-frame": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
-    "babel-watch": "^7.0.0",
+    "babel-watch": "git+https://git@github.com/kmagiera/babel-watch.git",
     "del-cli": "^1.1.0"
   }
 }
