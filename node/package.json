@@ -2,10 +2,7 @@
   "name": "express-api",
   "version": "1.0.0",
   "description": "express api node.js",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kgstaley/NewsFeed.git"
@@ -17,6 +14,15 @@
   },
   "homepage": "https://github.com/kgstaley/NewsFeed#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "http": "0.0.0",
+    "http-errors": "^1.7.2",
+    "tedious": "^5.0.3",
+    "tedious-connection-pool": "^1.0.5"
   }
 }
