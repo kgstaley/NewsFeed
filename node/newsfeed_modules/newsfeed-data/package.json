@@ -1,9 +1,0 @@
-{
-  "name": "newsfeed-data",
-  "version": "1.0.0",
-  "description": "Data Acces Wrapper for Tedious",
-  "main": "index.js",
-  "scripts": {},
-  "author": "Kerry Staley",
-  "license": "ISC"
-}
