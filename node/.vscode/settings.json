@@ -1,0 +1,41 @@
+{
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "files.exclude": {
+    "**/.compiled": true,
+    "**/node_modules": true,
+    ".babelrc": false,
+    ".deployment": true,
+    ".eslintrc": false,
+    ".eslintrc.json": false,
+    ".gitignore": true,
+    "copy-modules.ps1": true,
+    "copy-modules.cmd": true,
+    "deploy.cmd": true,
+    "iisnode": true,
+    "iisnode.yml": true,
+    "jsconfig.json": true,
+    "killNode.ps1": true,
+    "killSomeNode.ps1": true,
+    "link.cmd": true,
+    "link.ps1": true,
+    "move-modules.cmd": true,
+    "package-lock.json": true,
+    "remove-node-mods.cmd": true,
+    "shortlife.js": true,
+    "util": true,
+    "web.config": true,
+    "_web.config": true,
+    "yarn.lock": true
+  },
+  "debug.node.autoAttach": "off",
+  "npm.enableScriptExplorer": true,
+  "node-module-intellisense.modulePaths": ["app/**/**", "sabio-modules/**.**"],
+  "appService.deploySubpath": "",
+  "appService.defaultWebAppToDeploy": "/subscriptions/ee4ec2e3-ea11-41de-a4aa-7f03ae7964a0/resourceGroups/outln/providers/Microsoft.Web/sites/outln",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#42b883",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#42b883",
+    "titleBar.inactiveForeground": "#e7e7e7"
+  }
+}

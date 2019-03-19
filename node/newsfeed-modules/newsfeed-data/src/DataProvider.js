@@ -15,7 +15,7 @@ const chalk = require("chalk");
 
 config.config();
 
-const poolErrors = debug("sabio:data:pool");
+const poolErrors = debug("newsfeed:data:pool");
 
 class DataProvider {
   constructor(connString, opts) {
