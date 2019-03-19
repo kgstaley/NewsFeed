@@ -1,7 +1,7 @@
 const Filters = require("./filters");
 
-const newsfeedweb = {
+const SabioWeb = {
   Filters
 };
 
-module.exports = newsfeedweb;
+module.exports = SabioWeb;

@@ -4,10 +4,7 @@
   "description": "Declarative routing with Descriptors",
   "main": "index.js",
   "scripts": {},
-  "author": "Sabio - Gregorio Rojas",
+  "author": "Kerry Staley",
   "license": "ISC",
-  "types": "index.d.ts",
-  "repository": {
-    "url": "sabiocode.la"
-  }
+  "types": "index.d.ts"
 }

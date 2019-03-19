@@ -1,7 +1,7 @@
-const Responses = require("sabio-web-models").Responses;
+const Responses = require("newsfeed-web-models").Responses;
 const BaseController = require("../BaseController");
-const usersService = require("sabio-services").usersService;
-const { RoutePrefix, Route } = require("sabio-routing");
+const usersService = require("newsfeed-services").usersService;
+const { RoutePrefix, Route } = require("newsfeed-routing");
 
 @RoutePrefix("/api/dashboard/customer")
 class UsersController extends BaseController {

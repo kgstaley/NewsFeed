@@ -1,0 +1,9 @@
+{
+  "name": "newsfeed-web",
+  "version": "1.0.0",
+  "description": "newsfeed Middleware for Web Api's",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Kerry Staley",
+  "license": "ISC"
+}

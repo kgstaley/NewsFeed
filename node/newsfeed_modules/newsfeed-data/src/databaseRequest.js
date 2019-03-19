@@ -3,7 +3,7 @@ const { ERRORS } = require("./dataHelpers");
 const camelCase = require("camelcase");
 const debug = require("debug");
 
-const debugReq = debug("sabio:data:request");
+const debugReq = debug("newsfeed:data:request");
 
 module.exports = function databaseRequest(
   resolve,

@@ -79,7 +79,7 @@ module.exports = function Route(httpMethod, routePath, requestModel, name) {
     let originalMethod = descriptor.value;
     endpointFunciton.routePath = routePath;
     descriptor.value = endpointFunciton;
-    descriptor.touchedBy = "sabio";
+    descriptor.touchedBy = "newsfeed";
 
     return descriptor;
     function endpointFunciton(...args) {

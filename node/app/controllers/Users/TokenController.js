@@ -1,9 +1,9 @@
-const Responses = require("sabio-web-models").Responses;
+const Responses = require("newsfeed-web-models").Responses;
 const BaseController = require("../BaseController");
-const userService = require("sabio-services").userService;
+const userService = require("newsfeed-services").userService;
 var validate = require("uuid-validate");
 // const _debug = logger.extend("user");
-const { AllowAnonymous, RoutePrefix, Route } = require("sabio-routing");
+const { AllowAnonymous, RoutePrefix, Route } = require("newsfeed-routing");
 
 @RoutePrefix("/api/users")
 class TokenController extends BaseController {

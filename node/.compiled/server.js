@@ -15,7 +15,7 @@ var helmet = require("helmet");
 
 var routes = require("./routes");
 
-var Responses = require("newsfeed-web-models").Responses;
+var Responses = require("sabio-web-models").Responses;
 
 var app = express();
 

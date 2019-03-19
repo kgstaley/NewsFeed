@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const { config } = require("dotenv");
 const helmet = require("helmet");
 const routes = require("./routes");
-const Responses = require("newsfeed-web-models").Responses;
+const Responses = require("sabio-web-models").Responses;
 
 const app = express();
 var createError = require("http-errors");

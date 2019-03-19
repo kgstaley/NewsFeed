@@ -4,9 +4,6 @@
   "description": "Data Acces Wrapper for Tedious",
   "main": "index.js",
   "scripts": {},
-  "author": "Sabio - Gregorio Rojas",
-  "license": "ISC",
-  "repository": {
-    "url": "sabiocode.la"
-  }
+  "author": "Kerry Staley",
+  "license": "ISC"
 }
