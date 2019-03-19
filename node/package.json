@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kgstaley/NewsFeed/issues"
   },
-  "homepage": "https://github.com/kgstaley/NewsFeed#readme"
+  "homepage": "https://github.com/kgstaley/NewsFeed#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
