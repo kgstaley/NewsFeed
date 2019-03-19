@@ -1,0 +1,1 @@
+del /f /s /q node_modules\*.* > NUL
