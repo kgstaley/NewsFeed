@@ -1,7 +1,7 @@
 {
-  "name": "newsfeed-web-models",
+  "name": "newsfeed-routing",
   "version": "1.0.0",
-  "description": "Models used in responding to Api Reuests",
+  "description": "Declarative routing with Descriptors",
   "main": "index.js",
   "scripts": {},
   "author": "Sabio - Gregorio Rojas",

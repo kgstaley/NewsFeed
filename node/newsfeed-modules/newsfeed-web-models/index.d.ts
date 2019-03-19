@@ -1,1 +1,1 @@
-declare module "sabio-web-models" {}
+declare module "newsfeed-web-models" {}

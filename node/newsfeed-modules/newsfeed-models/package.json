@@ -1,7 +1,7 @@
 {
-  "name": "newsfeed-web-models",
+  "name": "newsfeed-models",
   "version": "1.0.0",
-  "description": "Models used in responding to Api Reuests",
+  "description": "Models used to describe the data structures and provide data validation",
   "main": "index.js",
   "scripts": {},
   "author": "Sabio - Gregorio Rojas",

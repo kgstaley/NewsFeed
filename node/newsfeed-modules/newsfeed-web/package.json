@@ -1,12 +1,11 @@
 {
-  "name": "newsfeed-web-models",
+  "name": "newsfeed-web",
   "version": "1.0.0",
-  "description": "Models used in responding to Api Reuests",
+  "description": "Sabio Middleware for Web Api's",
   "main": "index.js",
   "scripts": {},
   "author": "Sabio - Gregorio Rojas",
   "license": "ISC",
-  "types": "index.d.ts",
   "repository": {
     "url": "sabiocode.la"
   }

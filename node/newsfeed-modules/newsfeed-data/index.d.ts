@@ -1,1 +1,1 @@
-declare module "sabio-data" {}
+declare module "newsfeed-data" {}

@@ -1,7 +1,7 @@
 const Filters = require("./filters");
 
-const NewsfeedWeb = {
+const newsfeedweb = {
   Filters
 };
 
-module.exports = NewsfeedWeb;
+module.exports = newsfeedweb;
