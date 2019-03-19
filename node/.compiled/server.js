@@ -53,7 +53,7 @@ if (typeof apiPrefix === "string") {
 
 const port = 8080;
 app._server = http.listen(port, () => {
-  const url = `listening on http://localhost${port}/${apiPrefix}api/ping`;
+  const url = `listening on http://localhost:${port}/${apiPrefix}api/ping`;
   console.log(url);
 });
 module.exports = app;
