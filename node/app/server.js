@@ -3,7 +3,7 @@ const routes = require("./routes");
 const { json, urlencoded } = require("body-parser");
 const { config } = require("dotenv");
 const helmet = require("helmet");
-const Responses = require("../newsfeed-modules/newsfeed-web-models/src/responses/")
+const Responses = require("../newsfeed-modules/newsfeed-web-models/index")
   .Responses;
 
 const app = express();
@@ -47,7 +47,7 @@ if (typeof apiPrefix === "string") {
 
 const port = 8080;
 app._server = http.listen(port, () => {
-  const url = `listening on http://localhost:${port}/${apiPrefix}api/ping`;
+  const url = `listening on http://localhost:${port}/${apiPrefix}/ping`;
   console.log(url);
 });
 
