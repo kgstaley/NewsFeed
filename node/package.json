@@ -2,7 +2,7 @@
   "name": "express-api",
   "version": "1.0.0",
   "description": "express api node.js",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "start": "node --inspect-brk .compiled/server.js",
     "compile": "concurrently \"npm:babel-app\" \"npm:notify\" ",
