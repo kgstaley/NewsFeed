@@ -23,6 +23,32 @@ const insertUser = data => {
       })
       .then(result => {
         resolve(result);
+        sql.close();
+      })
+      .catch(err => {
+        reject(err);
+      });
+    sql.close();
+  });
+};
+
+const bcryptPw = password => {
+  bcrypt.hash(password, saltRounds).then(hash => {
+    return hash;
+  });
+};
+
+const getUsers = () => {
+  console.log(`Fetching all users`);
+  return new Promise((resolve, reject) => {
+    sql
+      .connect(config)
+      .then(pool => {
+        return pool.request().execute("dbo.Users_SelectAll");
+      })
+      .then(result => {
+        resolve(result);
+        sql.close();
       })
       .catch(err => {
         reject(err);
@@ -30,10 +56,4 @@ const insertUser = data => {
   });
 };
 
-const bcryptPw = password => {
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    return hash;
-  });
-};
-
-module.exports = { insertUser };
+module.exports = { insertUser, getUsers };

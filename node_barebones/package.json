@@ -4,7 +4,7 @@
   "description": "Node with Express API ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "kill-node": "PowerShell.exe \"%CD%\\killNode.ps1\" "
   },
   "repository": {
     "type": "git",
