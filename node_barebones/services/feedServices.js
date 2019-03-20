@@ -1,7 +1,7 @@
 const sql = require("mssql");
 
 const config =
-  "SQL_ConnectionString=Data Source=.;Initial Catalog=NewsFeed;Username=Kerry;Password=007Catdogs;";
+  "Data Source=.;Initial Catalog=NewsFeed;Username=Kerry;Password=007Catdogs;";
 
 const insertPost = data => {
   console.log(data);

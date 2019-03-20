@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const config =
-  "SQL_ConnectionString=Data Source=.;Initial Catalog=NewsFeed;Trusted_Connection=True;";
+  "Data Source=.;Initial Catalog=NewsFeed;Username=Kerry;Password=007Catdogs;";
 
 const bcryptPw = password => {
   bcrypt.hash(password, saltRounds).then(hash => {

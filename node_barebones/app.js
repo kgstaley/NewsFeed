@@ -7,6 +7,7 @@ const port = 8080;
 
 app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
+app.use(express.urlencoded({ extended: false }));
 
 //#region user controller
 app.post("/register", (req, res) => {
