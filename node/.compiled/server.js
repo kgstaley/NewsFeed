@@ -1,6 +1,6 @@
 const express = require("express");
 
-const routes = require("./routes");
+const routes = require("./routes/index");
 
 const {
   json,
@@ -53,7 +53,7 @@ if (typeof apiPrefix === "string") {
 
 const port = 8080;
 app._server = http.listen(port, () => {
-  const url = `listening on http://localhost:${port}/${apiPrefix}/ping`;
+  const url = `listening on http://localhost:${port}/${apiPrefix}ping`;
   console.log(url);
 });
 module.exports = app;
