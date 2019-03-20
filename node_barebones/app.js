@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const userServices = require("./services/userServices");
 const feedServices = require("./services/feedServices");
+const cors = require("cors");
 const port = 8080;
+
+app.use(express.json());
+app.use(cors({ credentials: true, origin: true }));
 
 //#region user controller
 app.post("/register", (req, res) => {
@@ -10,7 +14,7 @@ app.post("/register", (req, res) => {
   userServices
     .insertUser(req.body)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -21,40 +25,40 @@ app.get("/users", (req, res) => {
   userServices
     .getUsers()
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
     });
 });
 
-app.get(`/user/${id}`, (req, res) => {
+app.get(`/user/:id`, (req, res) => {
   userServices
     .getUser(req)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
     });
 });
 
-app.put(`/user/${id}/edit`, (req, res) => {
+app.put(`/user/:id/edit`, (req, res) => {
   userServices
-    .updateUser(req.id)
+    .updateUser(req)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
     });
 });
 
-app.delete(`/user/${id}/delete`, (req, res) => {
+app.delete(`/user/:id/delete`, (req, res) => {
   userServices
     .deleteUser(req)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -69,7 +73,7 @@ app.post("/feed", (req, res) => {
   feedServices
     .insertPost(req.body)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -80,29 +84,29 @@ app.get("/feed", (req, res) => {
   feedServices
     .getFeed()
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
     });
 });
 
-app.get(`/post/${id}`, (req, res) => {
+app.get(`/post/:id`, (req, res) => {
   feedServices
     .getPost(req)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
     });
 });
 
-app.delete(`/post/${id}/delete`, (req, res) => {
+app.delete(`/post/:id/delete`, (req, res) => {
   feedServices
-    .deletePost(id)
+    .deletePost(req)
     .then(res => {
-      res.json(res);
+      express.json(res);
     })
     .catch(err => {
       res.status(500).send(err);
