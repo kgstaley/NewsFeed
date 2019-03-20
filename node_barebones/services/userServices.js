@@ -1,9 +1,7 @@
 const sql = require("mssql");
 const bcrypt = require("bcrypt");
+const { poolPromise } = require("../connectionPool");
 const saltRounds = 10;
-
-const config =
-  "Data Source=.;Initial Catalog=NewsFeed;Username=Kerry;Password=007Catdogs;";
 
 const bcryptPw = password => {
   bcrypt.hash(password, saltRounds).then(hash => {
@@ -14,10 +12,9 @@ const bcryptPw = password => {
 const insertUser = data => {
   console.log(data);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    poolPromise
       .then(pool => {
-        return pool
+        pool
           .request()
           .input("Username", sql.NVarChar(50), data.username)
           .input("Firstname", sql.NVarChar(50), data.firstname)
@@ -28,38 +25,37 @@ const insertUser = data => {
           .execute("dbo.Users_Insert");
       })
       .then(result => {
-        resolve(result);
+        resolve(result.output);
       })
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
 const getUsers = () => {
   console.log(`Fetching all users`);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
-      .then(pool => {
-        return pool.request().execute("dbo.Users_SelectAll");
-      })
-      .then(result => {
-        resolve(result);
-      })
-      .catch(err => {
-        reject(err);
-      });
-    sql.close();
+    return poolPromise.then(pool => {
+      pool
+        .request()
+        .execute("dbo.Users_SelectAll", (err, users) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(users);
+        })
+        .then(sql.close())
+        .catch(err => reject(err));
+    });
   });
 };
 
 const getUser = id => {
   console.log(id);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool.request().execute("dbo.Users_SelectById");
       })
@@ -76,8 +72,7 @@ const getUser = id => {
 const updateUser = payload => {
   console.log(payload);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool
           .request()
@@ -101,8 +96,7 @@ const updateUser = payload => {
 const deleteUser = id => {
   console.log(id);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool
           .request()

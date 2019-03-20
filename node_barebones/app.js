@@ -11,7 +11,6 @@ app.use(express.urlencoded({ extended: false }));
 
 //#region user controller
 app.post("/register", (req, res) => {
-  // insert userService
   userServices
     .insertUser(req.body)
     .then(res => {
@@ -70,7 +69,6 @@ app.delete(`/user/:id/delete`, (req, res) => {
 
 //#region feed controller
 app.post("/feed", (req, res) => {
-  // insert feedService
   feedServices
     .insertPost(req.body)
     .then(res => {

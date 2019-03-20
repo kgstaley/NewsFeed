@@ -1,13 +1,10 @@
 const sql = require("mssql");
-
-const config =
-  "Data Source=.;Initial Catalog=NewsFeed;Username=Kerry;Password=007Catdogs;";
+const { poolPromise } = require("../connectionPool");
 
 const insertPost = data => {
   console.log(data);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool
           .request()
@@ -27,8 +24,7 @@ const insertPost = data => {
 
 const getFeed = () => {
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool.request().execute("dbo.Feeds_SelectAll");
       })
@@ -45,8 +41,7 @@ const getFeed = () => {
 const getPost = id => {
   console.log(id);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool
           .request()
@@ -66,8 +61,7 @@ const getPost = id => {
 const deletePost = id => {
   console.log(id);
   return new Promise((resolve, reject) => {
-    sql
-      .connect(config)
+    return poolPromise
       .then(pool => {
         return pool
           .request()
