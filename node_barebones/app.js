@@ -28,7 +28,38 @@ app.get("/users", (req, res) => {
     });
 });
 
-app.get(`/user/${id}`, (req, res) => {});
+app.get(`/user/${id}`, (req, res) => {
+  userServices
+    .getUser(req)
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+app.put(`/user/${id}/edit`, (req, res) => {
+  userServices
+    .updateUser(req.id)
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+app.delete(`/user/${id}/delete`, (req, res) => {
+  userServices
+    .deleteUser(req)
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
 
 //#endregion
 
@@ -37,6 +68,39 @@ app.post("/feed", (req, res) => {
   // insert feedService
   feedServices
     .insertPost(req.body)
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+app.get("/feed", (req, res) => {
+  feedServices
+    .getFeed()
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+app.get(`/post/${id}`, (req, res) => {
+  feedServices
+    .getPost(req)
+    .then(res => {
+      res.json(res);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+app.delete(`/post/${id}/delete`, (req, res) => {
+  feedServices
+    .deletePost(id)
     .then(res => {
       res.json(res);
     })

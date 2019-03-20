@@ -98,4 +98,25 @@ const updateUser = payload => {
   });
 };
 
-module.exports = { insertUser, getUsers, getUser, updateUser };
+const deleteUser = id => {
+  console.log(id);
+  return new Promise((resolve, reject) => {
+    sql
+      .connect(config)
+      .then(pool => {
+        return pool
+          .request()
+          .input("Id", sql.Int, id)
+          .execute("dbo.Users_Delete");
+      })
+      .then(result => {
+        resolve(result);
+      })
+      .catch(err => {
+        reject(err);
+      });
+    sql.close();
+  });
+};
+
+module.exports = { insertUser, getUsers, getUser, updateUser, deleteUser };
