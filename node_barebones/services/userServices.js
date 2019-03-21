@@ -3,22 +3,10 @@ const bcrypt = require("bcrypt");
 const { poolPromise } = require("../connectionPool");
 const saltRounds = 10;
 
-async function bcryptPw(password) {
-  const hashedPw = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(hash);
-    });
-  });
-  return hashedPw;
-}
-
 const insertUser = data => {
   console.log(data);
   return new Promise((resolve, reject) => {
-    const hashedPw = bcryptPw(data.password);
+    const hashedPw = bcrypt.hashSync(data.password, saltRounds);
     return poolPromise
       .then(pool => {
         pool
