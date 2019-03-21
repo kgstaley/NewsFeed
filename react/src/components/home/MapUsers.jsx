@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "reactstrap";
+import * as styles from "./homepage.module.css";
 
 const MapUsers = ({ users, editUser, deleteUser }) => {
   return users.map(user => {
     return (
-      <Card key={user.Id}>
+      <Card key={user.Id} className={styles.MapUserCard}>
         <p>Username: {user.Username}</p>
         <p>Firstname: {user.Firstname}</p>
         <p>Lastname: {user.Lastname}</p>
