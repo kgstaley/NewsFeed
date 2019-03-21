@@ -1,19 +1,24 @@
-// const sql = require("mssql");
+const sql = require("mssql");
 const bcrypt = require("bcrypt");
 const { poolPromise } = require("../connectionPool");
 const saltRounds = 10;
-const sql = require("mssql");
 
-const bcryptPw = password => {
-  bcrypt.hash(password, saltRounds).then(hash => {
-    return hash;
+async function bcryptPw(password) {
+  const hashedPw = await new Promise((resolve, reject) => {
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(hash);
+    });
   });
-};
+  return hashedPw;
+}
 
 const insertUser = data => {
   console.log(data);
   return new Promise((resolve, reject) => {
-    const hashedPW = this.bcryptPw(data.password);
+    const hashedPw = bcryptPw(data.password);
     return poolPromise
       .then(pool => {
         pool
@@ -22,7 +27,7 @@ const insertUser = data => {
           .input("Firstname", sql.NVarChar(50), data.firstname)
           .input("Lastname", sql.NVarChar(50), data.lastname)
           .input("Email", sql.NVarChar(100), data.email)
-          .input("Password", sql.NVarChar(100), hashedPW)
+          .input("Password", sql.NVarChar(100), data.password)
           .output("Id", sql.Int)
           .execute("dbo.Users_Insert", (err, result) => {
             if (err) {
