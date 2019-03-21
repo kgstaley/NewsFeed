@@ -13,12 +13,15 @@ const MapUserInfo = ({ user, userModal, toggleUserModal }) => {
     return (
       <div key={userAttribute.Id}>
         <Modal isOpen={userModal} toggle={toggleUserModal}>
-          <ModalHeader toggle={toggleUserModal}> Modal Header </ModalHeader>
+          <ModalHeader toggle={toggleUserModal}>
+            {" "}
+            {userAttribute.Firstname} {userAttribute.Lastname}
+          </ModalHeader>
           <ModalBody>
-            <div>
-              {userAttribute.Firstname} {userAttribute.Lastname}
-            </div>
+            <p>Username: {userAttribute.Username}</p>
+            <p>Email: {userAttribute.Email}</p>
           </ModalBody>
+          <ModalFooter>NewsFeed</ModalFooter>
         </Modal>
       </div>
     );

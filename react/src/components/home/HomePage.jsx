@@ -40,7 +40,6 @@ class HomePage extends React.Component {
   };
 
   getUser = id => {
-    console.log(id);
     userServices
       .getUser(id)
       .then(this.onGetUserByIdSuccess)
@@ -103,6 +102,7 @@ class HomePage extends React.Component {
 
   onDeleteUserSuccess = res => {
     console.log(`Successfully deleted user.`, res);
+    this.loadUsers();
   };
 
   onDeleteUserFail = err => {

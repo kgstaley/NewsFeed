@@ -17,7 +17,7 @@ class Welcome extends React.PureComponent {
             color="secondary"
             onClick={enter}
           >
-            Click to enter.
+            Click to enter
           </Button>
         </div>
       </Col>

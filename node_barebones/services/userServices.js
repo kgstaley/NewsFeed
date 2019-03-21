@@ -113,7 +113,6 @@ const updateUser = payload => {
 };
 
 const deleteUser = id => {
-  console.log(id);
   return new Promise((resolve, reject) => {
     return poolPromise
       .then(pool => {
