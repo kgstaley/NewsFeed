@@ -50,6 +50,9 @@ class HomePage extends React.Component {
                 <NavLink href="/feed">Feed</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink href="/users">Users</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="/logout">Logout</NavLink>
               </NavItem>
             </Nav>

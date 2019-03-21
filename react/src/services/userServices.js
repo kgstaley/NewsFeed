@@ -41,10 +41,10 @@ const getUser = id => {
     .catch(helpers.onGlobalError);
 };
 
-const updateUser = (id, payload) => {
+const updateUser = payload => {
   const config = {
     method: "PUT",
-    url: `http://localhost:8080/user/${id}/edit`,
+    url: `http://localhost:8080/user/${payload.id}/edit`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }

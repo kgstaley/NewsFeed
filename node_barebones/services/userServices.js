@@ -80,11 +80,11 @@ const updateUser = payload => {
       .then(pool => {
         return pool
           .request()
-          .input("Id", sql.Int, payload.id)
-          .input("Username", sql.NVarChar(50), payload.username)
-          .input("Firstname", sql.NVarChar(50), payload.firstname)
-          .input("Lastname", sql.NVarChar(50), payload.lastname)
-          .input("Email", sql.NVarChar(100), payload.email)
+          .input("Id", sql.Int, payload.Id)
+          .input("Username", sql.NVarChar(50), payload.Username)
+          .input("Firstname", sql.NVarChar(50), payload.Firstname)
+          .input("Lastname", sql.NVarChar(50), payload.Lastname)
+          .input("Email", sql.NVarChar(100), payload.Email)
           .execute("dbo.Users_Update", (err, result) => {
             if (err) {
               reject(err);

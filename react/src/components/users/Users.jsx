@@ -18,10 +18,8 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: "",
-      lastname: "",
       users: [],
-      user: [],
+      user: {},
       isOpen: false,
       editModal: false,
       userModal: false
@@ -53,6 +51,14 @@ class Users extends React.Component {
       .catch(this.onEditUserFail);
   };
 
+  updateUser = user => {
+    console.log(user);
+    userServices
+      .updateUser(user)
+      .then(this.onUpdateUserSuccess)
+      .catch(this.onUpdateUserFail);
+  };
+
   deleteUser = id => {
     userServices
       .deleteUser(id)
@@ -66,6 +72,21 @@ class Users extends React.Component {
 
   toggleUserModal = () => {
     this.setState({ userModal: !this.state.userModal });
+  };
+
+  toggleEditModal = () => {
+    this.setState({ editModal: !this.state.editModal, user: {} });
+  };
+
+  handleChange = evt => {
+    const key = evt.target.name;
+    const val = evt.target.value;
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [key]: val
+      }
+    }));
   };
 
   onGetUsersSuccess = res => {
@@ -90,9 +111,10 @@ class Users extends React.Component {
   };
 
   onEditUserSuccess = res => {
-    console.log(`Editing user ${res.recordset[0].Id}`);
+    console.log(`Editing user`, res.recordset[0]);
     this.setState({
-      editModal: true
+      editModal: true,
+      user: res.recordset[0]
     });
   };
 
@@ -143,7 +165,13 @@ class Users extends React.Component {
               />
             ) : null}
             {editModal ? (
-              <EditUser users={users} editModal={editModal} />
+              <EditUser
+                user={user}
+                editModal={editModal}
+                toggleEditModal={this.toggleEditModal}
+                handleChange={this.handleChange}
+                updateUser={this.updateUser}
+              />
             ) : null}
           </Col>
         </Row>

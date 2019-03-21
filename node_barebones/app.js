@@ -45,7 +45,7 @@ app.get(`/user/:id`, (req, res) => {
 
 app.put(`/user/:id/edit`, (req, res) => {
   userServices
-    .updateUser(req.params.id)
+    .updateUser(req.body)
     .then(response => {
       res.json(response);
     })
