@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import { Button, Card } from "reactstrap";
 import * as styles from "./homepage.module.css";
 
-const MapUsers = ({ users, editUser, deleteUser }) => {
+const MapUsers = ({ users, editUser, deleteUser, getUser }) => {
   return users.map(user => {
     return (
       <Card key={user.Id} className={styles.MapUserCard}>
-        <p>Username: {user.Username}</p>
+        <p onClick={() => getUser(user.Id)} className={styles.UsernameClick}>
+          Username: {user.Username}
+        </p>
         <p>Firstname: {user.Firstname}</p>
         <p>Lastname: {user.Lastname}</p>
         <Button

@@ -34,11 +34,18 @@ class HomePage extends React.Component {
       .catch(this.onGetUsersFail);
   };
 
-  editUser = id => {
+  getUser = id => {
     userServices
       .getUser(id)
       .then(this.onGetUserByIdSuccess)
       .catch(this.onGetUserByIdFail);
+  };
+
+  editUser = id => {
+    userServices
+      .getUser(id)
+      .then(this.onEditUserSuccess)
+      .catch(this.onEditUserFail);
   };
 
   deleteUser = id => {
@@ -67,6 +74,14 @@ class HomePage extends React.Component {
 
   onGetUserByIdFail = err => {
     console.log(`Failed to get user by ID.`, err);
+  };
+
+  onEditUserSuccess = res => {
+    console.log(`Successfully edited user.`, res);
+  };
+
+  onEditUserFail = err => {
+    console.log(`Failed to edit user.`, err);
   };
 
   onDeleteUserSuccess = res => {
@@ -101,6 +116,7 @@ class HomePage extends React.Component {
               users={users}
               editUser={this.editUser}
               deleteUser={this.deleteUser}
+              getUser={this.getUser}
             />
           </Col>
         </Row>

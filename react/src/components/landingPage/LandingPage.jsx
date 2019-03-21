@@ -12,7 +12,7 @@ class LandingPage extends React.Component {
   }
 
   enter = () => {
-    this.props.history.push(`/register`);
+    this.props.history.push(`/login`);
   };
 
   render = () => {

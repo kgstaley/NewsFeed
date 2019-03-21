@@ -40,12 +40,24 @@ const getUser = id => {
     .catch(helpers.onGlobalError);
 };
 
-const updateUser = (id, payload) => {};
+const updateUser = (id, payload) => {
+  const config = {
+    method: "PUT",
+    url: `http://localhost:8080/user/${id}/edit`,
+    data: payload,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
 
 const deleteUser = id => {
   const config = {
     method: "DELETE",
-    url: `http://localhost:8080/${id}/delete`,
+    url: `http://localhost:8080/user/${id}/delete`,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };
