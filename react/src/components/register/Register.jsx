@@ -14,8 +14,8 @@ class Register extends React.Component {
       email: " ",
       password: "",
       usernameValid: null,
-      firstNameValid: null,
-      lastNameValid: null,
+      firstnameValid: null,
+      lastnameValid: null,
       emailValid: null,
       passwordValid: null,
       formValid: null
@@ -45,23 +45,23 @@ class Register extends React.Component {
     if (key === "username" && val === "") {
       this.setState({ usernameValid: null });
     }
-    if (key === "firstName" && val.length >= 2) {
-      this.setState({ firstNameValid: true });
+    if (key === "firstname" && val.length >= 2) {
+      this.setState({ firstnameValid: true });
     }
-    if (key === "firstName" && val.length < 2) {
-      this.setState({ firstNameValid: false });
+    if (key === "firstname" && val.length < 2) {
+      this.setState({ firstnameValid: false });
     }
-    if (key === "firstName" && val === "") {
-      this.setState({ firstNameValid: null });
+    if (key === "firstname" && val === "") {
+      this.setState({ firstnameValid: null });
     }
-    if (key === "lastName" && val.length >= 2) {
-      this.setState({ lastNameValid: true });
+    if (key === "lastname" && val.length >= 2) {
+      this.setState({ lastnameValid: true });
     }
-    if (key === "lastName" && val.length < 2) {
-      this.setState({ lastNameValid: false });
+    if (key === "lastname" && val.length < 2) {
+      this.setState({ lastnameValid: false });
     }
-    if (key === "lastName" && val === "") {
-      this.setState({ lastNameValid: null });
+    if (key === "lastname" && val === "") {
+      this.setState({ lastnameValid: null });
     }
     if (key === "email" && /@/gi.test(val)) {
       this.setState({ emailValid: true });
@@ -94,8 +94,8 @@ class Register extends React.Component {
   formIsValid = () => {
     if (
       this.state.usernameValid &&
-      this.state.firstNameValid &&
-      this.state.lastNameValid &&
+      this.state.firstnameValid &&
+      this.state.lastnameValid &&
       this.state.emailValid &&
       this.state.passwordValid
     ) {
@@ -167,7 +167,7 @@ class Register extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            {this.state.firstNameValid === false && (
+            {this.state.firstnameValid === false && (
               <p className="frmWarning">
                 This field is required and must be between 2-50 characters
               </p>
@@ -178,11 +178,11 @@ class Register extends React.Component {
                 type="text"
                 name="lastname"
                 value={lastname}
-                placeholder="Lastname"
+                placeholder="Last Name"
                 onChange={this.handleChange}
               />
             </FormGroup>
-            {this.state.lastNameValid === false && (
+            {this.state.lastnameValid === false && (
               <p className="frmWarning">
                 This field is required and must be between 2-50 characters
               </p>
