@@ -34,7 +34,7 @@ app.get("/users", (req, res) => {
 
 app.get(`/user/:id`, (req, res) => {
   userServices
-    .getUser(req)
+    .getUser(req.params.id)
     .then(response => {
       res.json(response);
     })
@@ -45,7 +45,7 @@ app.get(`/user/:id`, (req, res) => {
 
 app.put(`/user/:id/edit`, (req, res) => {
   userServices
-    .updateUser(req)
+    .updateUser(req.params.id)
     .then(response => {
       res.json(response);
     })
@@ -56,7 +56,7 @@ app.put(`/user/:id/edit`, (req, res) => {
 
 app.delete(`/user/:id/delete`, (req, res) => {
   userServices
-    .deleteUser(req)
+    .deleteUser(req.params.id)
     .then(response => {
       res.json(response);
     })
@@ -92,7 +92,7 @@ app.get("/feed", (req, res) => {
 
 app.get(`/post/:id`, (req, res) => {
   feedServices
-    .getPost(req)
+    .getPost(req.params.id)
     .then(response => {
       res.json(response);
     })
@@ -103,7 +103,7 @@ app.get(`/post/:id`, (req, res) => {
 
 app.delete(`/post/:id/delete`, (req, res) => {
   feedServices
-    .deletePost(req)
+    .deletePost(req.params.id)
     .then(response => {
       res.json(response);
     })

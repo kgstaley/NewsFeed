@@ -11,6 +11,7 @@ import {
   NavLink,
   Collapse
 } from "reactstrap";
+import EditUser from "./EditUser";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class HomePage extends React.Component {
       firstname: "",
       lastname: "",
       users: [],
-      isOpen: false
+      isOpen: false,
+      modal: false
     };
   }
 
@@ -35,6 +37,7 @@ class HomePage extends React.Component {
   };
 
   getUser = id => {
+    console.log(id);
     userServices
       .getUser(id)
       .then(this.onGetUserByIdSuccess)
@@ -60,7 +63,7 @@ class HomePage extends React.Component {
   };
 
   onGetUsersSuccess = res => {
-    console.log(`Successful GET of all users`, res);
+    console.log(`Successful GET of all users`, res.recordset);
     this.setState({ users: res.recordset });
   };
 
@@ -70,6 +73,8 @@ class HomePage extends React.Component {
 
   onGetUserByIdSuccess = res => {
     console.log(`Successful get user by ID.`, res);
+    const userId = res.recordset[0].Id;
+    this.props.history.push(`/user/${userId}`);
   };
 
   onGetUserByIdFail = err => {
@@ -118,6 +123,7 @@ class HomePage extends React.Component {
               deleteUser={this.deleteUser}
               getUser={this.getUser}
             />
+            <EditUser users={users} />
           </Col>
         </Row>
       </div>

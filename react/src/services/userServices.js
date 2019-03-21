@@ -31,6 +31,7 @@ const getUser = id => {
   const config = {
     method: "GET",
     url: `http://localhost:8080/user/${id}`,
+    data: id,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };

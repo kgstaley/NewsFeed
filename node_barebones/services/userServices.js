@@ -64,17 +64,19 @@ const getUsers = () => {
 };
 
 const getUser = id => {
-  console.log(id);
   return new Promise((resolve, reject) => {
     return poolPromise
       .then(pool => {
-        return pool.request().execute("dbo.Users_SelectById", (err, result) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(result);
-        });
+        return pool
+          .request()
+          .input("Id", sql.Int, id)
+          .execute("dbo.Users_SelectById", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
       .then(sql.close)
       .catch(err => {
