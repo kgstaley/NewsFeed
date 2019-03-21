@@ -122,6 +122,16 @@ class Users extends React.Component {
     console.log(`Failed to edit user.`, err);
   };
 
+  onUpdateUserSuccess = res => {
+    console.log(`Successfully updated user.`, res);
+    this.toggleEditModal();
+    this.loadUsers();
+  };
+
+  onUpdateUserFail = err => {
+    console.log(`Failed to update user.`, err);
+  };
+
   onDeleteUserSuccess = res => {
     console.log(`Successfully deleted user.`, res);
     this.loadUsers();
