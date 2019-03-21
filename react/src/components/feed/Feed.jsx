@@ -1,7 +1,6 @@
 import React from "react";
 import {
-  Row,
-  Col,
+
   Navbar,
   Nav,
   NavbarBrand,
@@ -34,7 +33,7 @@ class Feed extends React.Component {
   onGetTopNewsSuccess = res => {
     const { news } = this.state;
     console.log(`Successful GET of news feed.`, res.articles);
-    if (news.length === 0) {
+    if (news.length > 0) {
       this.setState(prevState => {
         const newFeed = [...prevState.news, res.articles];
         return { news: newFeed };
@@ -53,11 +52,11 @@ class Feed extends React.Component {
     return (
       <div className="FeedContainer">
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">NewsFeed</NavbarBrand>
+          <NavbarBrand href="/home">NewsFeed</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/feed">Feed</NavLink>
+                <NavLink href="/users">Users</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/logout">Logout</NavLink>
