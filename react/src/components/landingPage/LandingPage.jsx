@@ -1,4 +1,5 @@
 import React from "react";
+import Welcome from "./Welcome";
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -9,7 +10,12 @@ class LandingPage extends React.Component {
   }
 
   render = () => {
-    return <div>{this.state.welcome}</div>;
+    const { welcome } = this.state;
+    return (
+      <div>
+        <Welcome welcome={welcome} />
+      </div>
+    );
   };
 }
 
