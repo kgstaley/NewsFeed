@@ -3,8 +3,8 @@ import * as helpers from "./serviceHelpers";
 
 const registerUser = payload => {
   const config = {
-    method: "GET",
-    url: `http://localhost:8080`,
+    method: "POST",
+    url: `http://localhost:8080/register`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }

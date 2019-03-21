@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+
+.welcome-appear {
+  opacity: 0.01;
+}
+
+.welcome-appear.welcome-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
