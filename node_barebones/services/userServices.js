@@ -27,7 +27,7 @@ const insertUser = data => {
           .input("Firstname", sql.NVarChar(50), data.firstname)
           .input("Lastname", sql.NVarChar(50), data.lastname)
           .input("Email", sql.NVarChar(100), data.email)
-          .input("Password", sql.NVarChar(100), data.password)
+          .input("Password", sql.NVarChar(100), hashedPw)
           .output("Id", sql.Int)
           .execute("dbo.Users_Insert", (err, result) => {
             if (err) {
