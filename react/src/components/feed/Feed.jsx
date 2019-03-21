@@ -1,6 +1,5 @@
 import React from "react";
 import {
-
   Navbar,
   Nav,
   NavbarBrand,
@@ -30,6 +29,11 @@ class Feed extends React.Component {
       .catch(this.onGetTopNewsFail);
   };
 
+  redirectToUrl = url => {
+    console.log(url);
+    document.location.assign(url);
+  };
+
   onGetTopNewsSuccess = res => {
     const { news } = this.state;
     console.log(`Successful GET of news feed.`, res.articles);
@@ -47,6 +51,14 @@ class Feed extends React.Component {
     console.log(`Failed to get news feed.`, err);
   };
 
+  onCreatePostSuccess = res => {
+    console.log(`Successfully created a new post!`, res);
+  };
+
+  onCreatePostFail = err => {
+    console.log(`Failed to create a new post.`, err);
+  };
+
   render = () => {
     const { news } = this.state;
     return (
@@ -55,6 +67,9 @@ class Feed extends React.Component {
           <NavbarBrand href="/home">NewsFeed</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink onClick={this.createPostModal}>Create a post</NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink href="/users">Users</NavLink>
               </NavItem>
@@ -65,7 +80,7 @@ class Feed extends React.Component {
           </Collapse>
         </Navbar>
         <div>
-          <MapFeed news={news} />
+          <MapFeed news={news} redirectToUrl={this.redirectToUrl} />
         </div>
       </div>
     );

@@ -1,10 +1,12 @@
 import axios from "axios";
 import * as helpers from "./serviceHelpers";
 
+const prefix = `http://localhost:8080`;
+
 const registerUser = payload => {
   const config = {
     method: "POST",
-    url: `http://localhost:8080/register`,
+    url: `${prefix}/register`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -17,7 +19,7 @@ const registerUser = payload => {
 const getUsers = () => {
   const config = {
     method: "GET",
-    url: `http://localhost:8080/users`,
+    url: `${prefix}/users`,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };
@@ -30,7 +32,7 @@ const getUsers = () => {
 const getUser = id => {
   const config = {
     method: "GET",
-    url: `http://localhost:8080/user/${id}`,
+    url: `${prefix}/user/${id}`,
     data: id,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -44,7 +46,7 @@ const getUser = id => {
 const updateUser = payload => {
   const config = {
     method: "PUT",
-    url: `http://localhost:8080/user/${payload.id}/edit`,
+    url: `${prefix}/user/${payload.id}/edit`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -58,7 +60,7 @@ const updateUser = payload => {
 const deleteUser = id => {
   const config = {
     method: "DELETE",
-    url: `http://localhost:8080/user/${id}/delete`,
+    url: `${prefix}/user/${id}/delete`,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };

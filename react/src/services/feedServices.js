@@ -2,11 +2,12 @@ import * as helpers from "./serviceHelpers";
 import axios from "axios";
 
 const newsApiUrl = `https://newsapi.org/v2`;
+const prefix = `http://localhost:8080`;
 
 const insertPost = payload => {
   const config = {
     method: "POST",
-    url: `http://localhost:8080/feed`,
+    url: `${prefix}/feed`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }

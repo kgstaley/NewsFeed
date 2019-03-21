@@ -6,4 +6,6 @@
 .ArticleImage {
   width: auto;
   height: auto;
+  align-content: center;
+  cursor: pointer;
 }
