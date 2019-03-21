@@ -12,6 +12,7 @@ import {
   Collapse
 } from "reactstrap";
 import EditUser from "./EditUser";
+import UserInfo from "./UserInfo";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -20,8 +21,10 @@ class HomePage extends React.Component {
       firstname: "",
       lastname: "",
       users: [],
+      user: [],
       isOpen: false,
-      modal: false
+      editModal: false,
+      userModal: false
     };
   }
 
@@ -62,6 +65,10 @@ class HomePage extends React.Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  toggleUserModal = () => {
+    this.setState({ userModal: !this.state.userModal });
+  };
+
   onGetUsersSuccess = res => {
     console.log(`Successful GET of all users`, res.recordset);
     this.setState({ users: res.recordset });
@@ -73,8 +80,10 @@ class HomePage extends React.Component {
 
   onGetUserByIdSuccess = res => {
     console.log(`Successful get user by ID.`, res);
-    const userId = res.recordset[0].Id;
-    this.props.history.push(`/user/${userId}`);
+    this.setState({
+      userModal: true,
+      user: res.recordsets[0]
+    });
   };
 
   onGetUserByIdFail = err => {
@@ -82,7 +91,10 @@ class HomePage extends React.Component {
   };
 
   onEditUserSuccess = res => {
-    console.log(`Successfully edited user.`, res);
+    console.log(`Editing user ${res.recordset[0].Id}`);
+    this.setState({
+      editModal: true
+    });
   };
 
   onEditUserFail = err => {
@@ -98,7 +110,7 @@ class HomePage extends React.Component {
   };
 
   render = () => {
-    const { users } = this.state;
+    const { users, user, editModal, userModal } = this.state;
     return (
       <div className="HomePage">
         <Navbar color="dark" dark expand="md">
@@ -123,7 +135,16 @@ class HomePage extends React.Component {
               deleteUser={this.deleteUser}
               getUser={this.getUser}
             />
-            <EditUser users={users} />
+            {userModal ? (
+              <UserInfo
+                user={user}
+                userModal={userModal}
+                toggleUserModal={this.toggleUserModal}
+              />
+            ) : null}
+            {editModal ? (
+              <EditUser users={users} editModal={editModal} />
+            ) : null}
           </Col>
         </Row>
       </div>
