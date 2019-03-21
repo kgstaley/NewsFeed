@@ -66,6 +66,19 @@ class Users extends React.Component {
       .catch(this.onDeleteUserFail);
   };
 
+  handleChange = evt => {
+    const key = evt.target.name;
+    const val = evt.target.value;
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [key]: val
+      }
+    }));
+  };
+
+  //#region toggle
+
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
@@ -78,19 +91,11 @@ class Users extends React.Component {
     this.setState({ editModal: !this.state.editModal, user: {} });
   };
 
-  handleChange = evt => {
-    const key = evt.target.name;
-    const val = evt.target.value;
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        [key]: val
-      }
-    }));
-  };
+  //#endregion
+
+  //#region onSuccess & onFail functions
 
   onGetUsersSuccess = res => {
-    console.log(`Successful GET of all users`, res.recordset);
     this.setState({ users: res.recordset });
   };
 
@@ -99,7 +104,6 @@ class Users extends React.Component {
   };
 
   onGetUserByIdSuccess = res => {
-    console.log(`Successful get user by ID.`, res);
     this.setState({
       userModal: true,
       user: res.recordsets[0]
@@ -111,7 +115,6 @@ class Users extends React.Component {
   };
 
   onEditUserSuccess = res => {
-    console.log(`Editing user`, res.recordset[0]);
     this.setState({
       editModal: true,
       user: res.recordset[0]
@@ -123,7 +126,6 @@ class Users extends React.Component {
   };
 
   onUpdateUserSuccess = res => {
-    console.log(`Successfully updated user.`, res);
     this.toggleEditModal();
     this.loadUsers();
   };
@@ -133,13 +135,14 @@ class Users extends React.Component {
   };
 
   onDeleteUserSuccess = res => {
-    console.log(`Successfully deleted user.`, res);
     this.loadUsers();
   };
 
   onDeleteUserFail = err => {
     console.log(`Failed to delete user.`, err);
   };
+
+  //#endregion
 
   render = () => {
     const { users, user, editModal, userModal } = this.state;
