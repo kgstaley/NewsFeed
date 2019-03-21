@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.post("/register", (req, res) => {
   userServices
     .insertUser(req.body)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -24,8 +24,8 @@ app.post("/register", (req, res) => {
 app.get("/users", (req, res) => {
   userServices
     .getUsers()
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -35,8 +35,8 @@ app.get("/users", (req, res) => {
 app.get(`/user/:id`, (req, res) => {
   userServices
     .getUser(req)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -46,8 +46,8 @@ app.get(`/user/:id`, (req, res) => {
 app.put(`/user/:id/edit`, (req, res) => {
   userServices
     .updateUser(req)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -57,8 +57,8 @@ app.put(`/user/:id/edit`, (req, res) => {
 app.delete(`/user/:id/delete`, (req, res) => {
   userServices
     .deleteUser(req)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -71,8 +71,8 @@ app.delete(`/user/:id/delete`, (req, res) => {
 app.post("/feed", (req, res) => {
   feedServices
     .insertPost(req.body)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -82,8 +82,8 @@ app.post("/feed", (req, res) => {
 app.get("/feed", (req, res) => {
   feedServices
     .getFeed()
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -93,8 +93,8 @@ app.get("/feed", (req, res) => {
 app.get(`/post/:id`, (req, res) => {
   feedServices
     .getPost(req)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
@@ -104,8 +104,8 @@ app.get(`/post/:id`, (req, res) => {
 app.delete(`/post/:id/delete`, (req, res) => {
   feedServices
     .deletePost(req)
-    .then(res => {
-      express.json(res);
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);

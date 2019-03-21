@@ -1,7 +1,8 @@
-const sql = require("mssql");
+// const sql = require("mssql");
 const bcrypt = require("bcrypt");
 const { poolPromise } = require("../connectionPool");
 const saltRounds = 10;
+const sql = require("mssql");
 
 const bcryptPw = password => {
   bcrypt.hash(password, saltRounds).then(hash => {
@@ -12,7 +13,8 @@ const bcryptPw = password => {
 const insertUser = data => {
   console.log(data);
   return new Promise((resolve, reject) => {
-    poolPromise
+    const hashedPW = this.bcryptPw(data.password);
+    return poolPromise
       .then(pool => {
         pool
           .request()
@@ -20,13 +22,17 @@ const insertUser = data => {
           .input("Firstname", sql.NVarChar(50), data.firstname)
           .input("Lastname", sql.NVarChar(50), data.lastname)
           .input("Email", sql.NVarChar(100), data.email)
-          .input("Password", sql.NVarChar(MAX), bcryptPw(data.password))
+          .input("Password", sql.NVarChar(100), hashedPW)
           .output("Id", sql.Int)
-          .execute("dbo.Users_Insert");
+          .execute("dbo.Users_Insert", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result.output);
+          });
       })
-      .then(result => {
-        resolve(result.output);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
@@ -39,14 +45,14 @@ const getUsers = () => {
     return poolPromise.then(pool => {
       pool
         .request()
-        .execute("dbo.Users_SelectAll", (err, users) => {
+        .execute("dbo.Users_SelectAll", (err, result) => {
           if (err) {
             reject(err);
             return;
           }
-          resolve(users);
+          resolve(result);
         })
-        .then(sql.close())
+        .then(sql.close)
         .catch(err => reject(err));
     });
   });
@@ -57,15 +63,18 @@ const getUser = id => {
   return new Promise((resolve, reject) => {
     return poolPromise
       .then(pool => {
-        return pool.request().execute("dbo.Users_SelectById");
+        return pool.request().execute("dbo.Users_SelectById", (err, result) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(result);
+        });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
@@ -81,15 +90,18 @@ const updateUser = payload => {
           .input("Firstname", sql.NVarChar(50), payload.firstname)
           .input("Lastname", sql.NVarChar(50), payload.lastname)
           .input("Email", sql.NVarChar(100), payload.email)
-          .execute("dbo.Users_Update");
+          .execute("dbo.Users_Update", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
@@ -101,15 +113,18 @@ const deleteUser = id => {
         return pool
           .request()
           .input("Id", sql.Int, id)
-          .execute("dbo.Users_Delete");
+          .execute("dbo.Users_Delete", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 

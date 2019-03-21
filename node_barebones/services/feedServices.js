@@ -10,15 +10,18 @@ const insertPost = data => {
           .request()
           .input("Body", sql.NVarChar(140), data.body)
           .input("CreatedBy", sql.Int, data.id)
-          .execute("dbo.Feeds_Insert");
+          .execute("dbo.Feeds_Insert", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
@@ -26,15 +29,18 @@ const getFeed = () => {
   return new Promise((resolve, reject) => {
     return poolPromise
       .then(pool => {
-        return pool.request().execute("dbo.Feeds_SelectAll");
+        return pool.request().execute("dbo.Feeds_SelectAll", (err, result) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(result);
+        });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
@@ -46,15 +52,18 @@ const getPost = id => {
         return pool
           .request()
           .input("Id", sql.Int, id)
-          .execute("dbo.Feeds_SelectById");
+          .execute("dbo.Feeds_SelectById", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
@@ -66,15 +75,18 @@ const deletePost = id => {
         return pool
           .request()
           .input("Id", sql.Int, id)
-          .execute("dbo.Feeds_Delete");
+          .execute("dbo.Feeds_Delete", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
       })
-      .then(result => {
-        resolve(result);
-      })
+      .then(sql.close)
       .catch(err => {
         reject(err);
       });
-    sql.close();
   });
 };
 
