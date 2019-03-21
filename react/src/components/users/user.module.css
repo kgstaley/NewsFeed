@@ -1,0 +1,9 @@
+.MapUserCard {
+  text-align: center;
+  padding: 5px;
+  margin: 15px;
+}
+
+.UsernameClick {
+  cursor: pointer;
+}

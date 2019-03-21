@@ -1,9 +1,6 @@
 import React from "react";
-import MapUsers from "./MapUsers";
 import * as userServices from "../../services/userServices";
 import {
-  Row,
-  Col,
   Navbar,
   NavbarBrand,
   Nav,
@@ -11,108 +8,40 @@ import {
   NavLink,
   Collapse
 } from "reactstrap";
-import EditUser from "./EditUser";
-import UserInfo from "./UserInfo";
+import * as styles from "./homepage.module.css";
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: "",
-      lastname: "",
-      users: [],
-      user: [],
-      isOpen: false,
-      editModal: false,
-      userModal: false
+      user: []
     };
   }
 
   componentDidMount = () => {
-    this.loadUsers();
+    this.loadUserInfo();
   };
 
-  loadUsers = () => {
+  loadUserInfo = () => {
     userServices
-      .getUsers()
-      .then(this.onGetUsersSuccess)
-      .catch(this.onGetUsersFail);
-  };
-
-  getUser = id => {
-    userServices
-      .getUser(id)
+      .getUser(22)
       .then(this.onGetUserByIdSuccess)
       .catch(this.onGetUserByIdFail);
   };
 
-  editUser = id => {
-    userServices
-      .getUser(id)
-      .then(this.onEditUserSuccess)
-      .catch(this.onEditUserFail);
-  };
-
-  deleteUser = id => {
-    userServices
-      .deleteUser(id)
-      .then(this.onDeleteUserSuccess)
-      .catch(this.onDeleteUserFail);
-  };
-
-  toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
-
-  toggleUserModal = () => {
-    this.setState({ userModal: !this.state.userModal });
-  };
-
-  onGetUsersSuccess = res => {
-    console.log(`Successful GET of all users`, res.recordset);
-    this.setState({ users: res.recordset });
-  };
-
-  onGetUsersFail = err => {
-    console.log(`Failed to get all users.`, err);
-  };
-
   onGetUserByIdSuccess = res => {
-    console.log(`Successful get user by ID.`, res);
-    this.setState({
-      userModal: true,
-      user: res.recordsets[0]
-    });
+    console.log(`Successfully grabbed user.`, res.recordset);
+    this.setState({ user: res.recordset[0] });
   };
 
   onGetUserByIdFail = err => {
-    console.log(`Failed to get user by ID.`, err);
-  };
-
-  onEditUserSuccess = res => {
-    console.log(`Editing user ${res.recordset[0].Id}`);
-    this.setState({
-      editModal: true
-    });
-  };
-
-  onEditUserFail = err => {
-    console.log(`Failed to edit user.`, err);
-  };
-
-  onDeleteUserSuccess = res => {
-    console.log(`Successfully deleted user.`, res);
-    this.loadUsers();
-  };
-
-  onDeleteUserFail = err => {
-    console.log(`Failed to delete user.`, err);
+    console.log(`Failed to grab by user Id`, err);
   };
 
   render = () => {
-    const { users, user, editModal, userModal } = this.state;
+    const { user } = this.state;
     return (
-      <div className="HomePage">
+      <div>
         <Navbar color="dark" dark expand="md">
           <NavbarBrand href="/">NewsFeed</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -126,27 +55,9 @@ class HomePage extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <Row>
-          <Col sm={{ size: 4, offset: 4 }}>
-            <h1>Users</h1>
-            <MapUsers
-              users={users}
-              editUser={this.editUser}
-              deleteUser={this.deleteUser}
-              getUser={this.getUser}
-            />
-            {userModal ? (
-              <UserInfo
-                user={user}
-                userModal={userModal}
-                toggleUserModal={this.toggleUserModal}
-              />
-            ) : null}
-            {editModal ? (
-              <EditUser users={users} editModal={editModal} />
-            ) : null}
-          </Col>
-        </Row>
+        <h3 className={styles.HomePageHeader}>
+          Welcome, {user.Firstname} {user.Lastname}
+        </h3>
       </div>
     );
   };

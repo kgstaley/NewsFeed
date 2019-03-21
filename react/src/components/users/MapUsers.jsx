@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "reactstrap";
-import * as styles from "./homepage.module.css";
+import * as styles from "./user.module.css";
 
 const MapUsers = ({ users, editUser, deleteUser, getUser }) => {
   return users.map(user => {
