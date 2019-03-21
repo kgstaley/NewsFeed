@@ -7,8 +7,7 @@ import {
   Form,
   FormGroup,
   Input,
-  Button,
-  ButtonGroup
+  Button
 } from "reactstrap";
 import PropTypes from "prop-types";
 
@@ -90,7 +89,8 @@ class EditUser extends React.PureComponent {
 EditUser.propTypes = {
   user: PropTypes.object,
   toggleEditModal: PropTypes.func,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
+  updateUser: PropTypes.func
 };
 
 export default EditUser;
