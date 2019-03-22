@@ -30,4 +30,30 @@ const onCreatePostSuccess = res => {
   };
 };
 
-export { createPost, onCreatePostSuccess };
+const updatePost = ({ payload }) => {
+  return dispatch => {
+    return feedServices.updatePost;
+  };
+};
+
+const getPosts = posts => {
+  return {
+    type: GET_ALL_POSTS,
+    posts
+  };
+};
+
+const getAllPosts = () => {
+  return dispatch => {
+    return feedServices
+      .getAllPosts()
+      .then(res => {
+        dispatch(getPosts(res.data));
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+export { createPost, onCreatePostSuccess, getPosts, getAllPosts };

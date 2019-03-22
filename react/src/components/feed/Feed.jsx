@@ -9,12 +9,16 @@ import {
 } from "reactstrap";
 import * as feedServices from "../../services/feedServices";
 import MapFeed from "./MapFeed";
+import CreatePost from "./CreatePost";
+import UserPosts from "./UserPosts";
+import * as styles from "./feed.module.css";
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: []
+      news: [],
+      postModal: false
     };
   }
 
@@ -32,6 +36,10 @@ class Feed extends React.Component {
   redirectToUrl = url => {
     console.log(url);
     document.location.assign(url);
+  };
+
+  togglePostModal = () => {
+    this.setState({ postModal: !this.state.postModal });
   };
 
   onGetTopNewsSuccess = res => {
@@ -60,7 +68,7 @@ class Feed extends React.Component {
   };
 
   render = () => {
-    const { news } = this.state;
+    const { news, postModal } = this.state;
     return (
       <div className="FeedContainer">
         <Navbar color="dark" dark expand="md">
@@ -68,7 +76,12 @@ class Feed extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={this.createPostModal}>Create a post</NavLink>
+                <NavLink
+                  onClick={this.togglePostModal}
+                  className={styles.CreatePostNavLink}
+                >
+                  Create a post
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/users">Users</NavLink>
@@ -81,6 +94,13 @@ class Feed extends React.Component {
         </Navbar>
         <div>
           <MapFeed news={news} redirectToUrl={this.redirectToUrl} />
+          {postModal ? (
+            <CreatePost
+              postModal={postModal}
+              togglePostModal={this.togglePostModal}
+            />
+          ) : null}
+          <UserPosts />
         </div>
       </div>
     );

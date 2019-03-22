@@ -31,4 +31,31 @@ const getTopNews = () => {
     .catch(helpers.onGlobalError);
 };
 
-export { insertPost, getTopNews };
+const getAllPosts = () => {
+  const config = {
+    method: "GET",
+    url: `${prefix}/feed`,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
+const updatePost = payload => {
+  const config = {
+    method: "PUT",
+    url: `${prefix}/feed`,
+    data: payload,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
+export { insertPost, getTopNews, updatePost, getAllPosts };

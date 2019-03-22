@@ -1,12 +1,42 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getAllPosts } from "../../actions/postActions";
 
 class UserPosts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: []
-    };
-  }
+  componentDidMount = () => {
+    this.props.getAllPosts();
+  };
+
+  render = () => {
+    return (
+      <div className="UserPostsContainer">
+        <div>hello </div>
+        <div>{this.props.posts.post}</div>
+      </div>
+    );
+  };
 }
 
-export default UserPosts;
+const mapStateToProps = state => {
+  return {
+    posts: state.postReducer
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllPosts: () => {
+      dispatch(getAllPosts());
+    }
+  };
+};
+
+UserPosts.propTypes = {
+  posts: PropTypes.array
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserPosts);
