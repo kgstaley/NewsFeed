@@ -6,7 +6,6 @@ import LandingPage from "./components/landingPage/LandingPage";
 import HomePage from "./components/home/HomePage";
 import Users from "./components/users/Users";
 import Feed from "./components/feed/Feed";
-import NewPost from "./containers/NewPost";
 
 class App extends Component {
   render() {
@@ -19,7 +18,6 @@ class App extends Component {
           <Route path="/home" component={HomePage} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/feed" component={Feed} />
-          <NewPost />
         </Switch>
       </div>
     );

@@ -57,7 +57,7 @@ const getAllPosts = () => {
     return feedServices
       .getAllPosts()
       .then(res => {
-        dispatch(getPosts(res.data));
+        dispatch(getPosts(res.recordset));
       })
       .catch(err => {
         throw err;
@@ -68,7 +68,7 @@ const getAllPosts = () => {
 const getPosts = posts => {
   return {
     type: GET_POSTS,
-    posts
+    posts: posts
   };
 };
 

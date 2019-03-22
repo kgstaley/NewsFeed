@@ -83,7 +83,7 @@ app.get("/feed", (req, res) => {
   feedServices
     .getFeed()
     .then(response => {
-      res.json(response);
+      rses.json(response);
     })
     .catch(err => {
       res.status(500).send(err);

@@ -14,12 +14,12 @@ class CreatePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: "",
-      createdBy: 22
+      Body: "",
+      CreatedBy: 22
     };
   }
   componentDidMount = () => {
-    //load a page here
+    console.log(`MOUNTING CREATE POST`);
   };
 
   handleChange = evt => {
@@ -33,7 +33,7 @@ class CreatePost extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    if (this.state.body.trim()) {
+    if (this.state.Body.trim()) {
       this.props.onAddPost(this.state);
       this.handleReset();
     }
@@ -46,7 +46,7 @@ class CreatePost extends React.Component {
 
   handleReset = () => {
     this.setState({
-      body: ""
+      Body: ""
     });
   };
 
@@ -65,8 +65,8 @@ class CreatePost extends React.Component {
               <FormGroup>
                 <Input
                   type="textarea"
-                  name="body"
-                  value={this.props.body}
+                  name="Body"
+                  value={this.state.Body}
                   placeholder="Write your post here..."
                   onChange={this.handleChange}
                 />

@@ -10,8 +10,9 @@ import {
 import * as feedServices from "../../services/feedServices";
 import MapFeed from "./MapFeed";
 import CreatePost from "./CreatePost";
-import UserPosts from "./UserPosts";
+// import UserPosts from "./UserPosts";
 import * as styles from "./feed.module.css";
+import PostContainer from "../../containers/PostContainer";
 
 class Feed extends React.Component {
   constructor(props) {
@@ -100,7 +101,7 @@ class Feed extends React.Component {
               togglePostModal={this.togglePostModal}
             />
           ) : null}
-          <UserPosts />
+          <PostContainer />
         </div>
       </div>
     );

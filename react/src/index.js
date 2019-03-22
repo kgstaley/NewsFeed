@@ -6,14 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers";
-import { getAllPosts } from "./actions/postActions";
+import reducers from "./reducers/postReducers";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-store.dispatch(getAllPosts());
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
