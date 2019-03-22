@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
   feedServices
     .getFeed()
     .then(response => {
-      rses.json(response);
+      res.json(response);
     })
     .catch(err => {
       res.status(500).send(err);
