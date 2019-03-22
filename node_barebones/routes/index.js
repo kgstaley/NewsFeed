@@ -5,6 +5,6 @@ const userController = require("../controllers/userController");
 const router = express.Router();
 
 router.use(`/feed`, feedController);
-router.use(`/user`, userController);
+router.use(`/users`, userController);
 
 module.exports = router;

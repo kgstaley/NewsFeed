@@ -10,7 +10,6 @@ import {
 import * as feedServices from "../../services/feedServices";
 import MapFeed from "./MapFeed";
 import CreatePost from "./CreatePost";
-// import UserPosts from "./UserPosts";
 import * as styles from "./feed.module.css";
 import PostContainer from "../../containers/PostContainer";
 

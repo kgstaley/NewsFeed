@@ -9,8 +9,9 @@ class UserPosts extends React.Component {
   mapPosts = posts => {
     return posts.map(post => {
       return (
-        <div>
-          <p>{post}</p>
+        <div key={post.Id}>
+          <p>{post.Body}</p>
+          <small>{post.DateCreated}</small>
         </div>
       );
     });
