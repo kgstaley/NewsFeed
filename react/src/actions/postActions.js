@@ -19,3 +19,64 @@ const createPost = payload => {
       });
   };
 };
+
+const createPostSuccess = res => {
+  return {
+    type: CREATE_POST,
+    payload: {
+      createdBy: res.createdBy,
+      body: res.body
+    }
+  };
+};
+
+const deletePost = id => {
+  return dispatch => {
+    return feedServices
+      .deletePost(id)
+      .then(res => {
+        dispatch(deletePostSuccess(res.data));
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+const deletePostSuccess = id => {
+  return {
+    type: DELETE_POST,
+    payload: {
+      id
+    }
+  };
+};
+
+const getAllPosts = () => {
+  return dispatch => {
+    return feedServices
+      .getAllPosts()
+      .then(res => {
+        dispatch(getPosts(res.data));
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+const getPosts = posts => {
+  return {
+    type: GET_POSTS,
+    posts
+  };
+};
+
+export {
+  createPost,
+  createPostSuccess,
+  deletePost,
+  deletePostSuccess,
+  getAllPosts,
+  getPosts
+};

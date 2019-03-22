@@ -58,4 +58,17 @@ const updatePost = payload => {
     .catch(helpers.onGlobalError);
 };
 
-export { insertPost, getTopNews, updatePost, getAllPosts };
+const deletePost = id => {
+  const config = {
+    method: "DELETE",
+    url: `${prefix}/${id}/delete`,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
+export { insertPost, getTopNews, updatePost, getAllPosts, deletePost };
