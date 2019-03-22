@@ -2,9 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const userServices = require("./services/userServices");
+const userServices = require("../services/userServices");
 
-//#region user controller
 router.post("/register", (req, res) => {
   userServices
     .insertUser(req.body)
@@ -60,4 +59,4 @@ router.delete(`/:id/delete`, (req, res) => {
     });
 });
 
-//#endregion
+module.exports = router;

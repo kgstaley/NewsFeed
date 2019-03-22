@@ -2,7 +2,7 @@
   "name": "package.json",
   "version": "1.0.0",
   "description": "Node with Express API ",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "kill-node": "PowerShell.exe \"%CD%\\killNode.ps1\" "
   },
