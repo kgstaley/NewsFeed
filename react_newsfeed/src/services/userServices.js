@@ -32,7 +32,7 @@ const getUsers = () => {
 const getUser = id => {
   const config = {
     method: "GET",
-    url: `${prefix}/user/${id}`,
+    url: `${prefix}/users/${id}`,
     data: id,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -46,7 +46,7 @@ const getUser = id => {
 const updateUser = payload => {
   const config = {
     method: "PUT",
-    url: `${prefix}/user/${payload.id}/edit`,
+    url: `${prefix}/users/${payload.id}/edit`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -60,7 +60,7 @@ const updateUser = payload => {
 const deleteUser = id => {
   const config = {
     method: "DELETE",
-    url: `${prefix}/user/${id}/delete`,
+    url: `${prefix}/users/${id}/delete`,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };

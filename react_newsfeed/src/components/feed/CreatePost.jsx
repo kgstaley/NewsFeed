@@ -44,6 +44,7 @@ class CreatePost extends React.Component {
   onSubmitSuccess = () => {
     this.handleReset();
     this.props.loadPage();
+    this.props.togglePostModal();
   };
 
   onSubmitFail = err => {
