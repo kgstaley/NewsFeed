@@ -14,8 +14,8 @@ class CreatePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Body: "",
-      CreatedBy: 22
+      body: "",
+      createdBy: 22
     };
   }
   componentDidMount = () => {
@@ -33,20 +33,27 @@ class CreatePost extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    if (this.state.Body.trim()) {
-      this.props.onAddPost(this.state);
-      this.handleReset();
+    if (this.state.body) {
+      this.props
+        .onAddPost(this.state)
+        .then(this.onSubmitSuccess)
+        .catch(this.onSubmitFail);
     }
   };
 
-  handleKeyDownSubmit = evt => {
-    evt.preventDefault();
-    this.handleSubmit(evt);
+  onSubmitSuccess = () => {
+    this.handleReset();
+    this.props.loadPage();
+    this.props.togglePostModal();
+  };
+
+  onSubmitFail = err => {
+    console.log(`Failed to insert new post.`, err);
   };
 
   handleReset = () => {
     this.setState({
-      Body: ""
+      body: ""
     });
   };
 
@@ -61,23 +68,17 @@ class CreatePost extends React.Component {
             Create a post
           </ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.handleKeyDownSubmit}>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Input
                   type="textarea"
-                  name="Body"
-                  value={this.state.Body}
+                  name="body"
+                  value={this.state.body}
                   placeholder="Write your post here..."
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              <Button
-                type="submit"
-                size="sm"
-                color="primary"
-                onClick={this.handleSubmit}
-                onKeyDown={this.handleKeyDownSubmit}
-              >
+              <Button type="submit" size="sm" color="primary">
                 Submit
               </Button>
             </Form>

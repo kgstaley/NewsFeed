@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "../actions/postActions";
 import UserPosts from "../components/feed/UserPosts";
 
-class PostContainer extends React.Component {
+class PostContainer extends React.PureComponent {
   render = () => {
     return (
       <UserPosts posts={this.props.posts} loadPosts={this.props.getAllPosts} />

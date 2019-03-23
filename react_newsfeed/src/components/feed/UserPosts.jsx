@@ -1,26 +1,23 @@
 import React from "react";
+import MapPosts from "./MapPosts";
 import PropTypes from "prop-types";
 
-class UserPosts extends React.Component {
+class UserPosts extends React.PureComponent {
   componentDidMount = () => {
     this.props.loadPosts();
   };
 
-  mapPosts = posts => {
-    return posts.map(post => {
-      return (
-        <div>
-          <p>{post}</p>
-        </div>
-      );
-    });
-  };
+  // componentDidUpdate = prevProps => {
+  //   if (this.props.posts !== prevProps.posts) {
+  //     this.props.loadPosts();
+  //   }
+  // };
 
   render = () => {
+    const { posts } = this.props;
     return (
       <div className="UserPostsContainer">
-        <div>hello </div>
-        <div>{this.props.posts ? this.mapPosts(this.props.posts) : null}</div>
+        {posts ? <MapPosts posts={posts} /> : null}
       </div>
     );
   };

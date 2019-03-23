@@ -1,4 +1,5 @@
 import { CREATE_POST, GET_POSTS } from "../actions/actionTypes";
+
 const initialState = {
   posts: []
 };
