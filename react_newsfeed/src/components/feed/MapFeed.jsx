@@ -7,11 +7,7 @@ const MapFeed = ({ news, redirectToUrl }) => {
   return news.map(article => {
     return (
       <Row key={article.url}>
-        <Col
-          sm={{ size: 5, offset: 1 }}
-          md={{ size: 5, offset: 1 }}
-          lg={{ size: 5, offset: 1 }}
-        >
+        <Col>
           <Card className={styles.MapFeedCard}>
             <h3>{article.title}</h3>
             <img

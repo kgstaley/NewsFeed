@@ -7,12 +7,12 @@ import {
 } from "./actionTypes";
 import * as feedServices from "../services/feedServices";
 
-const createPost = payload => {
+const createPost = ({ body, createdBy }) => {
   return dispatch => {
     return feedServices
-      .insertPost(payload)
+      .insertPost({ body, createdBy })
       .then(res => {
-        dispatch(createPostSuccess(res.data));
+        dispatch(createPostSuccess(res));
       })
       .catch(err => {
         throw err;
@@ -24,8 +24,9 @@ const createPostSuccess = res => {
   return {
     type: CREATE_POST,
     payload: {
-      createdBy: res.createdBy,
-      body: res.body
+      Id: res.Id,
+      Body: res.Body,
+      CreatedBy: res.CreatedBy
     }
   };
 };
@@ -58,6 +59,7 @@ const getAllPosts = () => {
       .getAllPosts()
       .then(res => {
         dispatch(getPosts(res.recordset));
+        console.log(`Successfully grabbed posts, REDUX`, res.recordset);
       })
       .catch(err => {
         throw err;

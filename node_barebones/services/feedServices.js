@@ -9,7 +9,8 @@ const insertPost = data => {
         return pool
           .request()
           .input("Body", sql.NVarChar(140), data.body)
-          .input("CreatedBy", sql.Int, data.id)
+          .input("CreatedBy", sql.Int, data.createdBy)
+          .output("Id", sql.Int)
           .execute("dbo.Feeds_Insert", (err, result) => {
             if (err) {
               reject(err);

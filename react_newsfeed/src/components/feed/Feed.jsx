@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Row,
+  Col,
   Navbar,
   Nav,
   NavbarBrand,
@@ -9,9 +11,9 @@ import {
 } from "reactstrap";
 import * as feedServices from "../../services/feedServices";
 import MapFeed from "./MapFeed";
-import CreatePost from "./CreatePost";
 import * as styles from "./feed.module.css";
 import PostContainer from "../../containers/PostContainer";
+import NewPost from "../../containers/NewPost";
 
 class Feed extends React.Component {
   constructor(props) {
@@ -92,15 +94,29 @@ class Feed extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
+        <Row>
+          <Col
+            sm={{ size: 5, offset: 1 }}
+            md={{ size: 5, offset: 1 }}
+            lg={{ size: 5, offset: 1 }}
+          >
+            <MapFeed news={news} redirectToUrl={this.redirectToUrl} />
+          </Col>
+          <Col
+            sm={{ size: 5, offset: 1 }}
+            md={{ size: 5, offset: 1 }}
+            lg={{ size: 5, offset: 1 }}
+          >
+            <PostContainer />
+          </Col>
+        </Row>
         <div>
-          <MapFeed news={news} redirectToUrl={this.redirectToUrl} />
           {postModal ? (
-            <CreatePost
+            <NewPost
               postModal={postModal}
               togglePostModal={this.togglePostModal}
             />
           ) : null}
-          <PostContainer />
         </div>
       </div>
     );

@@ -7,11 +7,16 @@ class UserPosts extends React.PureComponent {
     this.props.loadPosts();
   };
 
+  // componentDidUpdate = prevProps => {
+  //   if (this.props.posts !== prevProps.posts) {
+  //     this.props.loadPosts();
+  //   }
+  // };
+
   render = () => {
     const { posts } = this.props;
     return (
       <div className="UserPostsContainer">
-        <div>hello </div>
         {posts ? <MapPosts posts={posts} /> : null}
       </div>
     );

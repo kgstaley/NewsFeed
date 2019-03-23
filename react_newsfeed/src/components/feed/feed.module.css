@@ -13,3 +13,8 @@
 .CreatePostNavLink {
   cursor: pointer;
 }
+
+.MapPost {
+  padding: 5px;
+  margin: 15px;
+}
