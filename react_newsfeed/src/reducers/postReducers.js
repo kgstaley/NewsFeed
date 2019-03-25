@@ -7,7 +7,8 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  posts: []
+  posts: [],
+  postId: 0
 };
 
 const postReducer = (state = initialState, action) => {
@@ -25,7 +26,8 @@ const postReducer = (state = initialState, action) => {
     case GET_POST:
       return {
         ...state,
-        posts: action.posts
+        posts: action.posts,
+        postId: action.posts[0].Id
       };
     case UPDATE_POST:
       return {

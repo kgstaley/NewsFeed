@@ -41,7 +41,18 @@ class Feed extends React.Component {
   };
 
   togglePostModal = () => {
+    const { postId } = this.props;
+    const { postModal } = this.state;
     this.setState({ postModal: !this.state.postModal });
+    if (postModal) {
+      if (postId) {
+        this.propss.history.push(`/feed/${postId}/edit`);
+      } else {
+        this.props.history.push(`/feed/new`);
+      }
+    } else {
+      this.props.history.push(`/feed`);
+    }
   };
 
   onGetTopNewsSuccess = res => {
@@ -107,7 +118,10 @@ class Feed extends React.Component {
             md={{ size: 5, offset: 1 }}
             lg={{ size: 5, offset: 1 }}
           >
-            <PostContainer />
+            <PostContainer
+              postModal={postModal}
+              togglePostModal={this.togglePostModal}
+            />
           </Col>
         </Row>
         <div>

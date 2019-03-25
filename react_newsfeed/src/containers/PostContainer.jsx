@@ -11,6 +11,8 @@ class PostContainer extends React.PureComponent {
         loadPosts={this.props.getAllPosts}
         getPostById={this.props.getPost}
         deletePost={this.props.deletePost}
+        postModal={this.props.postModal}
+        togglePostModal={this.props.togglePostModal}
       />
     );
   };

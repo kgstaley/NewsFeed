@@ -48,4 +48,15 @@ router.delete(`/:id/delete`, (req, res) => {
     });
 });
 
+router.put(`/:id/edit`, (req, res) => {
+  feedServices
+    .updatePost(req.body)
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 module.exports = router;

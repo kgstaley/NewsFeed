@@ -18,8 +18,15 @@ class CreatePost extends React.Component {
       createdBy: 22
     };
   }
+
   componentDidMount = () => {
-    console.log(`MOUNTING CREATE POST`);
+    if (this.props.postId) {
+      this.setState({
+        body: this.props.posts[0].Body
+      });
+    } else {
+      this.handleReset();
+    }
   };
 
   handleChange = evt => {
@@ -33,13 +40,27 @@ class CreatePost extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    if (this.state.body) {
+    if (this.props.postId === 0) {
+      if (this.state.body) {
+        this.props
+          .onAddPost(this.state)
+          .then(this.onSubmitSuccess)
+          .catch(this.onSubmitFail);
+      }
+    } else {
       this.props
-        .onAddPost(this.state)
-        .then(this.onSubmitSuccess)
-        .catch(this.onSubmitFail);
+        .updatePost(this.props.postId)
+        .then(this.onUpdateSuccess)
+        .catch(this.onUpdateFail);
     }
   };
+
+  handleReset = () => {
+    this.setState({
+      body: ""
+    });
+  };
+  //#region onSuccess & onFail
 
   onSubmitSuccess = () => {
     this.handleReset();
@@ -51,11 +72,15 @@ class CreatePost extends React.Component {
     console.log(`Failed to insert new post.`, err);
   };
 
-  handleReset = () => {
-    this.setState({
-      body: ""
-    });
+  onUpdateSuccess = res => {
+    console.log(`Successfully updated post.`, res);
   };
+
+  onUpdateFail = err => {
+    console.log(`Failed to update post.`, err);
+  };
+
+  //#endregion
 
   render = () => {
     return (

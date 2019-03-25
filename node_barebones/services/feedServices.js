@@ -68,6 +68,30 @@ const getPost = id => {
   });
 };
 
+const updatePost = payload => {
+  console.log(payload);
+  return new Promise((resolve, reject) => {
+    return poolPromise
+      .then(pool => {
+        return pool
+          .request()
+          .input("Id", sql.Int, payload.id)
+          .input("Body", sql.NVarChar(140), payload.body)
+          .execute("dbo.Feeds_Update", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+          });
+      })
+      .then(sql.close)
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 const deletePost = id => {
   console.log(id);
   return new Promise((resolve, reject) => {
@@ -91,4 +115,4 @@ const deletePost = id => {
   });
 };
 
-module.exports = { insertPost, getFeed, getPost, deletePost };
+module.exports = { insertPost, getFeed, getPost, deletePost, updatePost };

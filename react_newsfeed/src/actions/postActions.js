@@ -82,9 +82,6 @@ const getPost = id => {
         dispatch(getPostSuccess(res.recordset));
         console.log(`Successfully grabbed post by ID.`, res.recordset);
       })
-      .then(res => {
-        dispatch(updatePost(res.recordset[0]));
-      })
       .catch(err => {
         throw err;
       });
@@ -94,7 +91,8 @@ const getPost = id => {
 const getPostSuccess = post => {
   return {
     type: GET_POST,
-    posts: post
+    posts: post,
+    postId: post.Id
   };
 };
 

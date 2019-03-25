@@ -13,12 +13,21 @@ class NewPost extends React.Component {
         loadPage={this.props.getAllPosts}
         getPostById={this.props.getPost}
         updatePost={this.props.updatePost}
+        postId={this.props.postId}
+        posts={this.props.posts}
       />
     );
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    posts: state.posts,
+    postId: state.postId
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actionCreators
 )(NewPost);

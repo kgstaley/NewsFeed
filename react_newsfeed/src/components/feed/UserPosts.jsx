@@ -23,6 +23,7 @@ class UserPosts extends React.PureComponent {
 
   onGetByIdSuccess = res => {
     console.log(`Successfully grabbed by ID.`, res);
+    this.props.togglePostModal();
   };
 
   onGetByIdFail = err => {
