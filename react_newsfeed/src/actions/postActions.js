@@ -74,11 +74,60 @@ const getPosts = posts => {
   };
 };
 
+const getPost = id => {
+  return dispatch => {
+    return feedServices
+      .getPost(id)
+      .then(res => {
+        dispatch(getPostSuccess(res.recordset));
+        console.log(`Successfully grabbed post by ID.`, res.recordset);
+      })
+      .then(res => {
+        dispatch(updatePost(res.recordset[0]));
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+const getPostSuccess = post => {
+  return {
+    type: GET_POST,
+    posts: post
+  };
+};
+
+const updatePost = payload => {
+  return dispatch => {
+    return feedServices
+      .updatePost(payload)
+      .then(res => {
+        dispatch(updatePostSuccess(res.recordset));
+        console.log(`Successfully updated post.`, res);
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+const updatePostSuccess = post => {
+  return {
+    type: UPDATE_POST,
+    posts: post
+  };
+};
+
 export {
   createPost,
   createPostSuccess,
   deletePost,
   deletePostSuccess,
   getAllPosts,
-  getPosts
+  getPosts,
+  getPost,
+  getPostSuccess,
+  updatePost,
+  updatePostSuccess
 };

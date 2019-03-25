@@ -7,17 +7,48 @@ class UserPosts extends React.PureComponent {
     this.props.loadPosts();
   };
 
-  // componentDidUpdate = prevProps => {
-  //   if (this.props.posts !== prevProps.posts) {
-  //     this.props.loadPosts();
-  //   }
-  // };
+  getPostById = id => {
+    this.props
+      .getPostById(id)
+      .then(this.onGetByIdSuccess)
+      .catch(this.onGetByIdFail);
+  };
+
+  deletePost = id => {
+    this.props
+      .deletePost(id)
+      .then(this.onDeleteSuccess)
+      .catch(this.onDeleteFail);
+  };
+
+  onGetByIdSuccess = res => {
+    console.log(`Successfully grabbed by ID.`, res);
+  };
+
+  onGetByIdFail = err => {
+    console.log(`Failed to get post by ID`, err);
+  };
+
+  onDeleteSuccess = res => {
+    console.log(`Successfully deleted post.`, res);
+    this.props.loadPosts();
+  };
+
+  onDeleteFail = err => {
+    console.log(`Failed to delete post`, err);
+  };
 
   render = () => {
     const { posts } = this.props;
     return (
       <div className="UserPostsContainer">
-        {posts ? <MapPosts posts={posts} /> : null}
+        {posts ? (
+          <MapPosts
+            posts={posts}
+            deletePost={this.deletePost}
+            getPostById={this.getPostById}
+          />
+        ) : null}
       </div>
     );
   };
@@ -25,7 +56,10 @@ class UserPosts extends React.PureComponent {
 
 UserPosts.propTypes = {
   posts: PropTypes.array,
-  loadPosts: PropTypes.func
+  loadPosts: PropTypes.func,
+  history: PropTypes.object,
+  deletePost: PropTypes.func,
+  getPostById: PropTypes.func
 };
 
 export default UserPosts;

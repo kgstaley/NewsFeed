@@ -6,7 +6,12 @@ import UserPosts from "../components/feed/UserPosts";
 class PostContainer extends React.PureComponent {
   render = () => {
     return (
-      <UserPosts posts={this.props.posts} loadPosts={this.props.getAllPosts} />
+      <UserPosts
+        posts={this.props.posts}
+        loadPosts={this.props.getAllPosts}
+        getPostById={this.props.getPost}
+        deletePost={this.props.deletePost}
+      />
     );
   };
 }

@@ -11,6 +11,8 @@ class NewPost extends React.Component {
         postModal={this.props.postModal}
         togglePostModal={this.props.togglePostModal}
         loadPage={this.props.getAllPosts}
+        getPostById={this.props.getPost}
+        updatePost={this.props.updatePost}
       />
     );
   };
