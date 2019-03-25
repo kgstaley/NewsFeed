@@ -18,8 +18,17 @@ class CreatePost extends React.Component {
       createdBy: 22
     };
   }
+
   componentDidMount = () => {
-    console.log(`MOUNTING CREATE POST`);
+    const { postId, posts } = this.props;
+    if (postId) {
+      const filteredPost = posts.filter(post => post.Id === postId);
+      this.setState({
+        body: filteredPost[0].Body
+      });
+    } else {
+      this.handleReset();
+    }
   };
 
   handleChange = evt => {
@@ -32,23 +41,24 @@ class CreatePost extends React.Component {
   };
 
   handleSubmit = evt => {
+    const { body } = this.state;
+    const id = this.props.postId;
+    const payload = this.state;
+    const updatePayload = { id, body };
     evt.preventDefault();
-    if (this.state.body) {
+    if (!this.props.postId) {
+      if (body) {
+        this.props
+          .onAddPost(payload)
+          .then(this.onSubmitSuccess)
+          .catch(this.onSubmitFail);
+      }
+    } else {
       this.props
-        .onAddPost(this.state)
-        .then(this.onSubmitSuccess)
-        .catch(this.onSubmitFail);
+        .updatePost(updatePayload)
+        .then(this.onUpdateSuccess)
+        .catch(this.onUpdateFail);
     }
-  };
-
-  onSubmitSuccess = () => {
-    this.handleReset();
-    this.props.loadPage();
-    this.props.togglePostModal();
-  };
-
-  onSubmitFail = err => {
-    console.log(`Failed to insert new post.`, err);
   };
 
   handleReset = () => {
@@ -56,6 +66,31 @@ class CreatePost extends React.Component {
       body: ""
     });
   };
+  //#region onSuccess & onFail
+
+  onSubmitSuccess = () => {
+    this.handleReset();
+    this.props.loadPage();
+    this.props.togglePostModal();
+    this.props.resetPostId();
+  };
+
+  onSubmitFail = err => {
+    console.log(`Failed to insert new post.`, err);
+  };
+
+  onUpdateSuccess = () => {
+    this.handleReset();
+    this.props.loadPage();
+    this.props.togglePostModal();
+    this.props.resetPostId();
+  };
+
+  onUpdateFail = err => {
+    console.log(`Failed to update post.`, err);
+  };
+
+  //#endregion
 
   render = () => {
     return (

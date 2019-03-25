@@ -1,9 +1,9 @@
 import {
   CREATE_POST,
   DELETE_POST,
-  UPDATE_POST,
   GET_POST,
-  GET_POSTS
+  GET_POSTS,
+  RESET_POSTID
 } from "./actionTypes";
 import * as feedServices from "../services/feedServices";
 
@@ -74,11 +74,52 @@ const getPosts = posts => {
   };
 };
 
+const getPost = id => {
+  return dispatch => {
+    return feedServices
+      .getPost(id)
+      .then(res => {
+        dispatch(getPostSuccess(res.recordset));
+        console.log(`Successfully grabbed post by ID REDUX.`, res.recordset);
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+};
+
+const getPostSuccess = post => {
+  return {
+    type: GET_POST,
+    posts: post,
+    postId: post.Id
+  };
+};
+
+const updatePost = payload => {
+  return () => {
+    return feedServices.updatePost(payload).catch(err => {
+      throw err;
+    });
+  };
+};
+
+const resetPostId = () => {
+  return {
+    type: RESET_POSTID,
+    postId: 0
+  };
+};
+
 export {
   createPost,
   createPostSuccess,
   deletePost,
   deletePostSuccess,
   getAllPosts,
-  getPosts
+  getPosts,
+  getPost,
+  getPostSuccess,
+  updatePost,
+  resetPostId
 };

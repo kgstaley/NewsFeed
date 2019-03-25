@@ -11,12 +11,24 @@ class NewPost extends React.Component {
         postModal={this.props.postModal}
         togglePostModal={this.props.togglePostModal}
         loadPage={this.props.getAllPosts}
+        getPostById={this.props.getPost}
+        updatePost={this.props.updatePost}
+        postId={this.props.postId}
+        posts={this.props.posts}
+        resetPostId={this.props.resetPostId}
       />
     );
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    posts: state.posts,
+    postId: state.postId
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actionCreators
 )(NewPost);

@@ -44,10 +44,24 @@ const getAllPosts = () => {
     .catch(helpers.onGlobalError);
 };
 
+const getPost = id => {
+  const config = {
+    method: "GET",
+    url: `${prefix}/feed/${id}`,
+    data: id,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
 const updatePost = payload => {
   const config = {
     method: "PUT",
-    url: `${prefix}/feed`,
+    url: `${prefix}/feed/${payload.postId}/edit`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -61,7 +75,7 @@ const updatePost = payload => {
 const deletePost = id => {
   const config = {
     method: "DELETE",
-    url: `${prefix}/${id}/delete`,
+    url: `${prefix}/feed/${id}/delete`,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };
@@ -71,4 +85,4 @@ const deletePost = id => {
     .catch(helpers.onGlobalError);
 };
 
-export { insertPost, getTopNews, updatePost, getAllPosts, deletePost };
+export { insertPost, getTopNews, updatePost, getAllPosts, getPost, deletePost };
