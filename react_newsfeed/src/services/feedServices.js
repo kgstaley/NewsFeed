@@ -61,7 +61,7 @@ const getPost = id => {
 const updatePost = payload => {
   const config = {
     method: "PUT",
-    url: `${prefix}/feed`,
+    url: `${prefix}/feed/${payload.postId}/edit`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }

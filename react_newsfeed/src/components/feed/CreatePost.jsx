@@ -20,9 +20,11 @@ class CreatePost extends React.Component {
   }
 
   componentDidMount = () => {
-    if (this.props.postId) {
+    const { postId, posts } = this.props;
+    if (postId) {
+      const filteredPost = posts.filter(post => post.Id === postId);
       this.setState({
-        body: this.props.posts[0].Body
+        body: filteredPost[0].Body
       });
     } else {
       this.handleReset();
@@ -39,17 +41,21 @@ class CreatePost extends React.Component {
   };
 
   handleSubmit = evt => {
+    const { body } = this.state;
+    const id = this.props.postId;
+    const payload = this.state;
+    const updatePayload = { id, body };
     evt.preventDefault();
-    if (this.props.postId === 0) {
-      if (this.state.body) {
+    if (!this.props.postId) {
+      if (body) {
         this.props
-          .onAddPost(this.state)
+          .onAddPost(payload)
           .then(this.onSubmitSuccess)
           .catch(this.onSubmitFail);
       }
     } else {
       this.props
-        .updatePost(this.props.postId)
+        .updatePost(updatePayload)
         .then(this.onUpdateSuccess)
         .catch(this.onUpdateFail);
     }
@@ -66,14 +72,18 @@ class CreatePost extends React.Component {
     this.handleReset();
     this.props.loadPage();
     this.props.togglePostModal();
+    this.props.resetPostId();
   };
 
   onSubmitFail = err => {
     console.log(`Failed to insert new post.`, err);
   };
 
-  onUpdateSuccess = res => {
-    console.log(`Successfully updated post.`, res);
+  onUpdateSuccess = () => {
+    this.handleReset();
+    this.props.loadPage();
+    this.props.togglePostModal();
+    this.props.resetPostId();
   };
 
   onUpdateFail = err => {

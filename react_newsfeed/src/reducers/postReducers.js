@@ -3,7 +3,8 @@ import {
   DELETE_POST,
   UPDATE_POST,
   GET_POST,
-  GET_POSTS
+  GET_POSTS,
+  RESET_POSTID
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -26,17 +27,24 @@ const postReducer = (state = initialState, action) => {
     case GET_POST:
       return {
         ...state,
-        posts: action.posts,
+        posts: [...state.posts],
         postId: action.posts[0].Id
       };
     case UPDATE_POST:
       return {
         ...state,
-        posts: [action.payload]
+        posts: [action.posts, action.payload],
+        postId: action.payload.Id
       };
     case DELETE_POST:
       return {
         posts: state.posts.filter(post => post.Id !== action.payload.Id)
+      };
+    case RESET_POSTID:
+      return {
+        ...state,
+        ...state.posts,
+        postId: 0
       };
     default:
       return state;

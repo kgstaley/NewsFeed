@@ -41,17 +41,9 @@ class Feed extends React.Component {
   };
 
   togglePostModal = () => {
-    const { postId } = this.props;
-    const { postModal } = this.state;
     this.setState({ postModal: !this.state.postModal });
-    if (postModal) {
-      if (postId) {
-        this.propss.history.push(`/feed/${postId}/edit`);
-      } else {
-        this.props.history.push(`/feed/new`);
-      }
-    } else {
-      this.props.history.push(`/feed`);
+    if (this.props.posts === this.prevProps.posts) {
+      this.props.resetPostId();
     }
   };
 

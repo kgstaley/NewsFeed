@@ -21,8 +21,7 @@ class UserPosts extends React.PureComponent {
       .catch(this.onDeleteFail);
   };
 
-  onGetByIdSuccess = res => {
-    console.log(`Successfully grabbed by ID.`, res);
+  onGetByIdSuccess = () => {
     this.props.togglePostModal();
   };
 
@@ -31,7 +30,6 @@ class UserPosts extends React.PureComponent {
   };
 
   onDeleteSuccess = res => {
-    console.log(`Successfully deleted post.`, res);
     this.props.loadPosts();
   };
 

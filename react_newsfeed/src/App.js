@@ -7,6 +7,7 @@ import HomePage from "./components/home/HomePage";
 import Users from "./components/users/Users";
 import Feed from "./components/feed/Feed";
 import { connect } from "react-redux";
+import * as postActions from "./actions/postActions";
 
 class App extends Component {
   render() {
@@ -18,7 +19,17 @@ class App extends Component {
           <Route exact path="/register" component={Register} />
           <Route path="/home" component={HomePage} />
           <Route exact path="/users" component={Users} />
-          <Route path="/feed" render={props => <Feed {...this.props} />} />
+          <Route
+            path="/feed"
+            render={props => (
+              <Feed
+                {...this.props}
+                loadPosts={this.props.getAllPosts}
+                resetPostId={this.props.resetPostId}
+                posts={this.props.posts}
+              />
+            )}
+          />
         </Switch>
       </div>
     );
@@ -34,5 +45,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  postActions
 )(App);

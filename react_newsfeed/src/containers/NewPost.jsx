@@ -15,6 +15,7 @@ class NewPost extends React.Component {
         updatePost={this.props.updatePost}
         postId={this.props.postId}
         posts={this.props.posts}
+        resetPostId={this.props.resetPostId}
       />
     );
   };
