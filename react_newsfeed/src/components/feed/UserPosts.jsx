@@ -29,7 +29,7 @@ class UserPosts extends React.PureComponent {
     console.log(`Failed to get post by ID`, err);
   };
 
-  onDeleteSuccess = res => {
+  onDeleteSuccess = () => {
     this.props.loadPosts();
   };
 
