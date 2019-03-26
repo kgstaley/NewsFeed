@@ -42,11 +42,15 @@ class Feed extends React.Component {
 
   togglePostModal = () => {
     const { postModal } = this.state;
-    this.setState({ postModal: !postModal });
-    if (postModal === false) {
+    this.setState({ postModal: !postModal }, this.resetPostId);
+  };
+
+  resetPostId = () => {
+    const { postModal } = this.state;
+    if (!postModal) {
       this.props.resetPostId();
     } else {
-      console.log(`do nothing`);
+      console.log(`Do nothing.`);
     }
   };
 
