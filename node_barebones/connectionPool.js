@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connString = process.env.SQL_ConnectionString;
-connString.split()
 
 const poolPromise = new sql.ConnectionPool(connString)
   .connect()
