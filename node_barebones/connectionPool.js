@@ -1,8 +1,11 @@
 const sql = require("mssql");
-const config =
-  "Data Source=.;Initial Catalog=NewsFeed;User ID=Kerry;Password=Password1;";
+const dotenv = require("dotenv");
 
-const poolPromise = new sql.ConnectionPool(config)
+dotenv.config();
+
+const connString = process.env.SQL_ConnectionString;
+
+const poolPromise = new sql.ConnectionPool(connString)
   .connect()
   .then(pool => {
     console.log(pool);
