@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const IncomingForm = require("formidable").IncomingForm;
 
+const IncomingForm = require("formidable").IncomingForm;
 const fs = require("fs");
+const uuid = require("uuid");
 
 const fileService = require("../services/fileServices");
 const AWS = require("aws-sdk");
@@ -14,35 +15,35 @@ AWS.config.update({
 });
 
 router.post("/", (req, res) => {
-  const form = new IncomingForm(); 
-  form.multiples = true; 
+  const promises = [];
+  const form = new IncomingForm();
+  form.multiples = true;
 
-  form.on("file", (filed, file)=> {
-    let fileName = ""; 
-    let buffer = null; 
+  form.on("file", (field, file) => {
+    let fileName = "";
+    let buffer = null;
 
     buffer = fs.readFileSync(file.path);
     fileName = file.name;
 
-    let upload = {}; 
+    let upload = {};
     upload.userId = req.user.id;
-    upload.fileName = fileName; 
+    upload.fileName = fileName;
 
     const type = mime.contentType(fileName);
-    upload.fileType = type; 
+    upload.fileType = type;
 
-    let key = `newsfeed` 
-  })
+    let key = `newsfeed${uuid.v4()}-${fileName}`;
+    upload.fileUrl = key;
 
-
-  fileService
-    .uploadFile(req.body)
-    .then(response => {
-      res.json(response);
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    });
+    const uploadPromise = fileService
+      .uploadFile(fileName, buffer, key)
+      .then(() => fileService.storeFile(upload))
+      .catch(err => {
+        res.status(500).send(err);
+      });
+  });
+  promises.push(uploadPromise);
 });
 
 const storeFile = (req, res) => {
