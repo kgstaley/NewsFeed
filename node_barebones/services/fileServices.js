@@ -1,31 +1,29 @@
 const sql = require("mssql");
 const { poolPromise } = require("../connectionPool");
 const AWS = require("aws-sdk");
-const multer = require("multer");
-const multerS3 = require("multer-s3");
+const mime = require("mime-types");
 
-AWS.config.update({
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID
-});
+const upload = (key, file, url) => {
+  const s3 = new AWS.S3();
+  const type = mime.contentType(key);
 
-const s3 = new AWS.S3();
+  const params = {
+    Bucket: "sabio-s3",
+    Key: url,
+    Body: file,
+    ContentType: type
+  };
 
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: "sabio-s3",
-    metadata: (req, file, cb) => {
-      cb(null, {
-        fileUrl: file.fileUrl,
-        fileType: file.fileType
-      });
-    },
-    key: (req, file, cb) => {
-      cb(null, Date.now().toString());
-    }
-  })
-});
+  return new Promise((resolve, reject) => {
+    s3.putObject(params, (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(params.key);
+    });
+  });
+};
 
 const storeFile = file => {
   console.log(file);
