@@ -1,20 +1,19 @@
 const express = require("express");
 const router = express.Router();
-
-const IncomingForm = require("formidable").IncomingForm;
+const AWS = require("aws-sdk");
 const fs = require("fs");
+const mime = require("mime-types");
 const uuid = require("uuid");
+const IncomingForm = require("formidable").IncomingForm;
 
 const fileService = require("../services/fileServices");
-const AWS = require("aws-sdk");
-const mime = require("mime-types");
 
 AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID
 });
 
-router.post("/", (req, res) => {
+router.post("/upload-image", (req, res) => {
   const promises = [];
   const form = new IncomingForm();
   form.multiples = true;
@@ -27,35 +26,46 @@ router.post("/", (req, res) => {
     fileName = file.name;
 
     let upload = {};
-    upload.userId = req.user.id;
+    upload.userId = 22;
     upload.fileName = fileName;
 
     const type = mime.contentType(fileName);
     upload.fileType = type;
 
-    let key = `newsfeed${uuid.v4()}-${fileName}`;
+    let key = `newsfeed/` + uuid.v4() + `-` + fileName;
     upload.fileUrl = key;
 
     const uploadPromise = fileService
-      .uploadFile(fileName, buffer, key)
+      .upload(fileName, buffer, key)
       .then(() => fileService.storeFile(upload))
       .catch(err => {
-        res.status(500).send(err);
+        throw err;
+      });
+
+    promises.push(uploadPromise);
+  });
+
+  form.on("end", () => {
+    Promise.all(promises)
+      .then(values => {
+        let urls = [];
+        for (let i = 0; i < values.length; i++) {
+          urls.push(process.env.AWS_DOMAIN + values[i].file.fileUrl);
+        }
+      })
+      .then(response => {
+        res.json(response);
+      })
+      .catch(err => {
+        throw err;
       });
   });
-  promises.push(uploadPromise);
-});
 
-const storeFile = (req, res) => {
-  console.log(req);
-  fileService
-    .storeFile(req.body)
-    .then(response => {
-      res.json(response);
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    });
-};
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      throw err;
+    }
+  });
+});
 
 module.exports = router;
