@@ -6,11 +6,25 @@ const prefix = `http://localhost:8080`;
 const registerUser = payload => {
   const config = {
     method: "POST",
-    url: `${prefix}/register`,
+    url: `${prefix}/users/register`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
   };
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
+const login = payload => {
+  const config = {
+    method: "POST",
+    url: `${prefix}/users/login`,
+    data: payload,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
   return axios(config)
     .then(helpers.onGlobalSuccess)
     .catch(helpers.onGlobalError);
@@ -70,4 +84,4 @@ const deleteUser = id => {
     .catch(helpers.onGlobalError);
 };
 
-export { registerUser, getUsers, getUser, updateUser, deleteUser };
+export { registerUser, getUsers, getUser, updateUser, deleteUser, login };

@@ -32,6 +32,40 @@ const insertUser = data => {
   });
 };
 
+const login = data => {
+  console.log(data);
+  let comparePW = false;
+  return new Promise((resolve, reject) => {
+    return poolPromise
+      .then(pool => {
+        pool
+          .request()
+          .input("Username", sql.NVarChar(50), data.username)
+          .execute("dbo.Users_Login", (err, result) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(result);
+            comparePW = bcrypt.compareSync(
+              data.password,
+              result.recordset[0].Password
+            );
+            if (comparePW) {
+              console.log(`log the user in.`);
+            } else {
+              console.log(`Failed to authenticate user.`);
+              return;
+            }
+          });
+      })
+      .then(sql.close)
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 const getUsers = () => {
   console.log(`Fetching all users`);
   return new Promise((resolve, reject) => {
@@ -122,4 +156,11 @@ const deleteUser = id => {
   });
 };
 
-module.exports = { insertUser, getUsers, getUser, updateUser, deleteUser };
+module.exports = {
+  insertUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+  login
+};

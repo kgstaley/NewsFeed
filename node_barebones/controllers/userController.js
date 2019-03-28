@@ -15,6 +15,17 @@ router.post("/register", (req, res) => {
     });
 });
 
+router.post(`/login`, (req, res) => {
+  userServices
+    .login(req.body)
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 router.get("/", (req, res) => {
   userServices
     .getUsers()
