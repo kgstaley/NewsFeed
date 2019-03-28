@@ -4,6 +4,7 @@ const UPDATE_POST = "UPDATE_POST";
 const GET_POSTS = "GET_POSTS";
 const GET_POST = "GET_POST";
 const RESET_POSTID = "RESET_POSTID";
+const LOGIN_USER = "LOGIN_USER";
 
 export {
   CREATE_POST,
@@ -11,5 +12,6 @@ export {
   UPDATE_POST,
   GET_POST,
   GET_POSTS,
-  RESET_POSTID
+  RESET_POSTID,
+  LOGIN_USER
 };
