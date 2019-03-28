@@ -1,4 +1,6 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+const uuid = require("uuid");
 
 const router = express.Router();
 
@@ -7,8 +9,14 @@ const userServices = require("../services/userServices");
 router.post("/register", (req, res) => {
   userServices
     .insertUser(req.body)
-    .then(response => {
-      res.json(response);
+    .then(() => {
+      const token = jwt.sign(
+        { id: req.body.username + uuid.v4() },
+        process.env.TOKEN_SECRET,
+        { expiresIn: 86400 }
+      );
+      // send the auth token back
+      res.status(200).send({ auth: true, token: token });
     })
     .catch(err => {
       res.status(500).send(err);
@@ -18,8 +26,14 @@ router.post("/register", (req, res) => {
 router.post(`/login`, (req, res) => {
   userServices
     .login(req.body)
-    .then(response => {
-      res.json(response);
+    .then(() => {
+      const token = jwt.sign(
+        { id: req.body.username + uuid.v4() },
+        process.env.TOKEN_SECRET,
+        { expiresIn: 86400 }
+      );
+      // send the auth token back on success
+      res.status(200).send({ auth: true, token: token });
     })
     .catch(err => {
       res.status(500).send(err);
