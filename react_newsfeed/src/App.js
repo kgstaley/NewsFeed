@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Login from "./components/login/Login";
+import LoginContainer from "./containers/LoginContainer";
 import Register from "./components/register/Register";
 import LandingPage from "./components/landingPage/LandingPage";
 import HomePage from "./components/home/HomePage";
@@ -15,7 +15,16 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/login"
+            render={props => (
+              <LoginContainer
+                {...this.props}
+                userLoggedIn={this.props.userLoggedIn}
+              />
+            )}
+          />
           <Route exact path="/register" component={Register} />
           <Route path="/home" component={HomePage} />
           <Route exact path="/users" component={Users} />
@@ -38,8 +47,9 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts,
-    postId: state.postId
+    posts: state.postReducer.posts,
+    postId: state.postReducer.postId,
+    userLoggedIn: state.loginReducer.userLoggedIn
   };
 };
 

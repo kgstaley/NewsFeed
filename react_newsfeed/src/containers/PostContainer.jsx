@@ -19,8 +19,8 @@ class PostContainer extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts,
-    postId: state.postId
+    posts: state.postReducer.posts,
+    postId: state.postReducer.postId
   };
 };
 

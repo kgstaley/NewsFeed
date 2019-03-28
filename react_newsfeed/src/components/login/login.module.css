@@ -1,5 +1,11 @@
 .loginStyles {
   align-content: center;
   box-align: center;
-  
+}
+
+.loginBackground {
+  background-image: url("https://banffairporter.com/wp-content/uploads/2018/10/home-banner.jpg");
+  background-repeat: repeat;
+  height: 100%;
+  width: 100%;
 }

@@ -50,7 +50,7 @@ router.post("/upload-image", (req, res) => {
       .then(values => {
         let urls = [];
         for (let i = 0; i < values.length; i++) {
-          urls.push(process.env.AWS_DOMAIN + values[i].file.fileUrl);
+          urls.push(process.env.AWS_DOMAIN + values[i]);
         }
       })
       .then(response => {
