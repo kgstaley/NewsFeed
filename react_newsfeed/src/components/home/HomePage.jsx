@@ -9,6 +9,7 @@ import {
   Collapse
 } from "reactstrap";
 import * as styles from "./homepage.module.css";
+import UserUploads from "../fileUpload/UserUploads";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class HomePage extends React.Component {
         <h3 className={styles.HomePageHeader}>
           Welcome, {user.Firstname} {user.Lastname}
         </h3>
+        <UserUploads />
       </div>
     );
   };
