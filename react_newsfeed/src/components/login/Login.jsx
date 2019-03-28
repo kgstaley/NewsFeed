@@ -14,7 +14,6 @@ import {
   Button
 } from "reactstrap";
 import * as styles from "./login.module.css";
-import * as userService from "../../services/userServices";
 
 class Login extends React.Component {
   constructor(props) {
@@ -38,14 +37,7 @@ class Login extends React.Component {
     const { username, password } = this.state;
     const payload = { username, password };
     evt.preventDefault();
-    userService
-      .login(payload)
-      .then(this.onLoginSuccess)
-      .catch(this.onLoginFail);
-  };
-
-  onLoginSuccess = res => {
-    console.log(`Successful user login.`, res);
+    this.props.login(payload).catch(this.onLoginFail);
   };
 
   onLoginFail = err => {
@@ -54,7 +46,12 @@ class Login extends React.Component {
 
   render = () => {
     return (
-      <div>
+      <div className={styles.loginBackground}>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Row className={styles.loginStyles}>
           <Col
             sm={{ size: 4, offset: 4 }}

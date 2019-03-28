@@ -5,7 +5,7 @@ import loginReducer from "../src/reducers/loginReducer";
 
 const middleware = [thunk];
 
-const reducers = combineReducers(postReducer, loginReducer);
+const reducers = combineReducers({ postReducer, loginReducer });
 
 const store = createStore(
   reducers,
