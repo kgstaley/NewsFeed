@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "../actions/actionTypes";
+import { LOGIN_USER, LOGOUT_USER } from "../actions/actionTypes";
 
 const initialState = {
   userLoggedIn: false
@@ -10,6 +10,11 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         userLoggedIn: true
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        userLoggedIn: false
       };
     default:
       return state;

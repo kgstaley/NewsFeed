@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginContainer from "./containers/LoginContainer";
+import Logout from "./components/logout/Logout";
 import Register from "./components/register/Register";
 import LandingPage from "./components/landingPage/LandingPage";
 import HomePage from "./components/home/HomePage";
 import Users from "./components/users/Users";
 import Feed from "./components/feed/Feed";
 import { connect } from "react-redux";
-import * as postActions from "./actions/postActions";
 
 class App extends Component {
   render() {
@@ -22,6 +22,17 @@ class App extends Component {
               <LoginContainer
                 {...this.props}
                 userLoggedIn={this.props.userLoggedIn}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/logout"
+            render={props => (
+              <Logout
+                {...this.props}
+                userLoggedIn={this.props.userLoggedIn}
+                logout={this.props.logout}
               />
             )}
           />
@@ -53,7 +64,24 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => {
+      dispatch({ type: "LOGOUT_USER" });
+    },
+    login: () => {
+      dispatch({ type: "LOGIN_USER" });
+    },
+    getAllPosts: () => {
+      dispatch({ type: "GET_POSTS" });
+    },
+    resetPostId: () => {
+      dispatch({ type: "RESET_POSTID" });
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  postActions
+  mapDispatchToProps
 )(App);

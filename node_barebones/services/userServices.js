@@ -34,7 +34,7 @@ const insertUser = data => {
 
 const login = data => {
   console.log(data);
-  let comparePW = false;
+  let passwordValid = false;
   return new Promise((resolve, reject) => {
     return poolPromise
       .then(pool => {
@@ -47,15 +47,14 @@ const login = data => {
               return;
             }
             resolve(result);
-            comparePW = bcrypt.compareSync(
+            passwordValid = bcrypt.compareSync(
               data.password,
               result.recordset[0].Password
             );
-            if (comparePW) {
-              console.log(`log the user in.`);
+            if (passwordValid) {
+              console.log(`log the user in and attach jwt.`);
             } else {
               console.log(`Failed to authenticate user.`);
-              return;
             }
           });
       })

@@ -25,7 +25,7 @@ class UserUploads extends React.Component {
 
   imageUpload = image => {
     console.log(image);
-    const imageUrl = image[0];
+    const imageUrl = image;
     this.setState(
       {
         imageUrlArray: image,

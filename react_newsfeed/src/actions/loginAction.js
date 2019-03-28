@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "./actionTypes";
+import { LOGIN_USER, LOGOUT_USER } from "./actionTypes";
 import * as userService from "../services/userServices";
 
 const login = payload => {
@@ -25,4 +25,20 @@ const logUserInSuccess = res => {
   };
 };
 
-export { login, logUserInSuccess };
+const logout = () => {
+  this.dispatch(logoutUserSuccess())
+    .then(res => {
+      console.log(`SUCCESSFULLY LOGGED USER OUT REDUX.`, res);
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+const logoutUserSuccess = res => {
+  return {
+    type: LOGOUT_USER
+  };
+};
+
+export { login, logUserInSuccess, logout, logoutUserSuccess };

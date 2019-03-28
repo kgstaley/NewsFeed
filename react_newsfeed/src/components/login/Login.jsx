@@ -14,6 +14,7 @@ import {
   Button
 } from "reactstrap";
 import * as styles from "./login.module.css";
+import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -37,7 +38,14 @@ class Login extends React.Component {
     const { username, password } = this.state;
     const payload = { username, password };
     evt.preventDefault();
-    this.props.login(payload).catch(this.onLoginFail);
+    this.props
+      .login(payload)
+      .then(this.onLoginSuccess)
+      .catch(this.onLoginFail);
+  };
+
+  onLoginSuccess = () => {
+    this.props.history.push(`/home`);
   };
 
   onLoginFail = err => {
@@ -100,4 +108,4 @@ class Login extends React.Component {
   };
 }
 
-export default Login;
+export default withRouter(Login);

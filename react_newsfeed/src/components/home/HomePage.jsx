@@ -1,13 +1,6 @@
 import React from "react";
 import * as userServices from "../../services/userServices";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Collapse
-} from "reactstrap";
+import NavBar from "../navbar/NavBar";
 import * as styles from "./homepage.module.css";
 import UserUploads from "../fileUpload/UserUploads";
 
@@ -43,22 +36,7 @@ class HomePage extends React.Component {
     const { user } = this.state;
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">NewsFeed</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/feed">Feed</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/users">Users</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/logout">Logout</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <NavBar />
         <h3 className={styles.HomePageHeader}>
           Welcome, {user.Firstname} {user.Lastname}
         </h3>
