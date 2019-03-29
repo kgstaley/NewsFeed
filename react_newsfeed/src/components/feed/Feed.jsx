@@ -89,7 +89,10 @@ class Feed extends React.Component {
     return (
       <div className="FeedContainer">
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand onClick={() => this.historyPush(`home`)}>
+          <NavbarBrand
+            onClick={() => this.historyPush(`home`)}
+            className={styles.CreatePostNavLink}
+          >
             NewsFeed
           </NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -103,12 +106,18 @@ class Feed extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={() => this.historyPush(`users`)}>
+                <NavLink
+                  onClick={() => this.historyPush(`users`)}
+                  className={styles.CreatePostNavLink}
+                >
                   Users
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={() => this.historyPush(`logout`)}>
+                <NavLink
+                  onClick={() => this.historyPush(`logout`)}
+                  className={styles.CreatePostNavLink}
+                >
                   Logout
                 </NavLink>
               </NavItem>
