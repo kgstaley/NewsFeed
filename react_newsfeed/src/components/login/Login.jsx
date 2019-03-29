@@ -21,7 +21,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      showLoginFailure: false
     };
   }
 
@@ -50,6 +51,15 @@ class Login extends React.Component {
 
   onLoginFail = err => {
     console.log(`Failed to authenticate user.`, err);
+    this.setState({
+      showLoginFailure: true
+    });
+  };
+
+  loginFailWarn = () => {
+    window.alert(
+      "The inputted username or password does not match our records."
+    );
   };
 
   render = () => {
@@ -92,6 +102,12 @@ class Login extends React.Component {
                       placeholder="Password"
                     />
                   </FormGroup>
+                  {this.state.showLoginFailure ? (
+                    <div>
+                      The inputted username or password does not match our
+                      records
+                    </div>
+                  ) : null}
                   <div className="float-right">
                     <Button type="submit" color="primary" size="sm">
                       Login
