@@ -42,19 +42,15 @@ const login = data => {
           .request()
           .input("Username", sql.NVarChar(50), data.username)
           .execute("dbo.Users_Login", (err, result) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve(result);
             passwordValid = bcrypt.compareSync(
               data.password,
               result.recordset[0].Password
             );
             if (passwordValid) {
-              console.log(`log the user in and attach jwt.`);
+              resolve(result);
             } else {
-              console.log(`Failed to authenticate user.`);
+              reject(err);
+              return;
             }
           });
       })
