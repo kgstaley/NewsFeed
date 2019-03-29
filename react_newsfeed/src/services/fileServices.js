@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as helpers from "./serviceHelpers";
 
-const prefix = `http://localhost:8080`;
+const prefix = `http://localhost:8080/files`;
 
 const storeFile = file => {
   const config = {
@@ -37,4 +37,17 @@ const uploadFiles = evt => {
     });
 };
 
-export default storeFile;
+const getFiles = () => {
+  const config = {
+    method: "GET",
+    url: `${prefix}`,
+    crossdomain: true,
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return axios(config)
+    .then(helpers.onGlobalSuccess)
+    .catch(helpers.onGlobalError);
+};
+
+export { storeFile, getFiles };

@@ -68,4 +68,15 @@ router.post("/upload-image", (req, res) => {
   });
 });
 
+router.get("/", (req, res) => {
+  fileService
+    .getFiles()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 module.exports = router;

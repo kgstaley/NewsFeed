@@ -52,4 +52,23 @@ const storeFile = file => {
   });
 };
 
-module.exports = { upload, storeFile };
+const getFiles = () => {
+  return new Promise((resolve, reject) => {
+    return poolPromise
+      .then(pool => {
+        pool.request().execute("dbo.Files_SelectAll", (err, result) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(result);
+        });
+      })
+      .then(sql.close)
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+module.exports = { upload, storeFile, getFiles };
