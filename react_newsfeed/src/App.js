@@ -8,7 +8,6 @@ import HomePage from "./components/home/HomePage";
 import Users from "./components/users/Users";
 import Feed from "./components/feed/Feed";
 import { connect } from "react-redux";
-import * as styles from "./app.module.css";
 
 class App extends Component {
   render() {

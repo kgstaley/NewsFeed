@@ -4,3 +4,18 @@
   padding: 2rem;
   margin: 15px;
 }
+
+.UserUploadImages {
+  height: 100%;
+  width: 100%;
+}
+
+.UserUploadCards {
+  padding: 15px;
+  margin: 15px;
+}
+
+.CardRow {
+  display: flex;
+  flex-direction: row;
+}
