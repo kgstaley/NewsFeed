@@ -32,6 +32,7 @@ class FileUpload extends React.Component {
         let urls = res.data.items;
         this.returnUploads(urls);
       })
+      .then(this.props.loadUserImages)
       .catch(err => {
         console.log(`FAILED ON AXIOS POST OF FILES.`, err);
       });

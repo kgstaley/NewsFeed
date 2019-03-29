@@ -13,9 +13,14 @@
 .UserUploadCards {
   padding: 15px;
   margin: 15px;
+  background-color: #242425;
 }
 
-.CardRow {
+.FlexContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
