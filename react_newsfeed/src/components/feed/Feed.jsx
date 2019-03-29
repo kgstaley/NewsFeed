@@ -14,6 +14,7 @@ import MapFeed from "./MapFeed";
 import * as styles from "./feed.module.css";
 import PostContainer from "../../containers/PostContainer";
 import NewPost from "../../containers/NewPost";
+import { withRouter } from "react-router-dom";
 
 class Feed extends React.Component {
   constructor(props) {
@@ -79,12 +80,18 @@ class Feed extends React.Component {
     console.log(`Failed to create a new post.`, err);
   };
 
+  historyPush = route => {
+    this.props.history.push(`/${route}`);
+  };
+
   render = () => {
     const { news, postModal } = this.state;
     return (
       <div className="FeedContainer">
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">NewsFeed</NavbarBrand>
+          <NavbarBrand onClick={() => this.historyPush(`home`)}>
+            NewsFeed
+          </NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
@@ -96,10 +103,14 @@ class Feed extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/users">Users</NavLink>
+                <NavLink onClick={() => this.historyPush(`users`)}>
+                  Users
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/logout">Logout</NavLink>
+                <NavLink onClick={() => this.historyPush(`logout`)}>
+                  Logout
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -136,4 +147,4 @@ class Feed extends React.Component {
   };
 }
 
-export default Feed;
+export default withRouter(Feed);

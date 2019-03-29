@@ -11,6 +11,13 @@ import { connect } from "react-redux";
 
 class App extends Component {
   render() {
+    const {
+      userLoggedIn,
+      posts,
+      logout,
+      resetPostId,
+      getAllPosts
+    } = this.props;
     return (
       <div>
         <Switch>
@@ -18,38 +25,43 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={props => (
-              <LoginContainer
-                {...this.props}
-                userLoggedIn={this.props.userLoggedIn}
-              />
-            )}
+            render={props => <LoginContainer {...this.props} />}
           />
+          (
           <Route
             exact
             path="/logout"
             render={props => (
               <Logout
                 {...this.props}
-                userLoggedIn={this.props.userLoggedIn}
-                logout={this.props.logout}
+                userLoggedIn={userLoggedIn}
+                logout={logout}
               />
             )}
           />
           <Route exact path="/register" component={Register} />
-          <Route path="/home" component={HomePage} />
-          <Route exact path="/users" component={Users} />
-          <Route
-            path="/feed"
-            render={props => (
-              <Feed
-                {...this.props}
-                loadPosts={this.props.getAllPosts}
-                resetPostId={this.props.resetPostId}
-                posts={this.props.posts}
-              />
-            )}
-          />
+          {userLoggedIn && (
+            <Route
+              path="/home"
+              render={props => (
+                <HomePage {...this.props} userLoggedIn={userLoggedIn} />
+              )}
+            />
+          )}
+          {userLoggedIn && <Route exact path="/users" component={Users} />}
+          {userLoggedIn && (
+            <Route
+              path="/feed"
+              render={props => (
+                <Feed
+                  {...this.props}
+                  loadPosts={getAllPosts}
+                  resetPostId={resetPostId}
+                  posts={posts}
+                />
+              )}
+            />
+          )}
         </Switch>
       </div>
     );

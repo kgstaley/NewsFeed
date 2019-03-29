@@ -1,18 +1,10 @@
 import React from "react";
 import MapUsers from "./MapUsers";
 import * as userServices from "../../services/userServices";
-import {
-  Row,
-  Col,
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Collapse
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
 import EditUser from "./EditUser";
 import UserInfo from "../users/UserInfo";
+import NavBar from "../navbar/NavBar";
 
 class Users extends React.Component {
   constructor(props) {
@@ -148,19 +140,7 @@ class Users extends React.Component {
     const { users, user, editModal, userModal } = this.state;
     return (
       <div className="Users">
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">NewsFeed</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/feed">Feed</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/logout">Logout</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <NavBar />
         <Row>
           <Col sm={{ size: 4, offset: 4 }}>
             <h1>Users</h1>
