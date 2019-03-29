@@ -2,6 +2,7 @@
   text-align: center;
   font-size: 10rem;
   vertical-align: bottom;
+  color: #242425;
 }
 
 .LandingHeader {
@@ -9,9 +10,11 @@
   font-size: 4rem;
   vertical-align: text-bottom;
   padding: 4px;
+  color: #242425;
 }
 
 .EnterBtn {
   text-align: center;
   padding: 4px;
+  color: #242425;
 }
