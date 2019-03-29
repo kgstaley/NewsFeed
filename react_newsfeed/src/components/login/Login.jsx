@@ -62,6 +62,10 @@ class Login extends React.Component {
     );
   };
 
+  redirect = () => {
+    this.props.history.push(`/register`);
+  };
+
   render = () => {
     return (
       <div className={styles.loginBackground}>
@@ -114,6 +118,14 @@ class Login extends React.Component {
                     </Button>
                   </div>
                 </Form>
+                <Button
+                  type="button"
+                  size="sm"
+                  color="default"
+                  onClick={this.redirect}
+                >
+                  Don't have an account?
+                </Button>
               </CardBody>
               <CardFooter>NewsFeed</CardFooter>
             </Card>

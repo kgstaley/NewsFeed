@@ -119,6 +119,10 @@ class Register extends React.Component {
       .catch(this.onRegFail);
   };
 
+  cancel = () => {
+    this.props.history.push(`/login`);
+  };
+
   onRegSuccess = res => {
     console.log(`Successful registration.`, res);
     this.props.history.push("/home");
