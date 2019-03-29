@@ -8,6 +8,7 @@ import HomePage from "./components/home/HomePage";
 import Users from "./components/users/Users";
 import Feed from "./components/feed/Feed";
 import { connect } from "react-redux";
+import * as styles from "./app.module.css";
 
 class App extends Component {
   render() {
@@ -40,35 +41,29 @@ class App extends Component {
             )}
           />
           <Route exact path="/register" component={Register} />
-          {userLoggedIn && (
-            <Route
-              path="/home"
-              render={props => (
-                <HomePage {...this.props} userLoggedIn={userLoggedIn} />
-              )}
-            />
-          )}
-          {userLoggedIn && <Route exact path="/users" component={Users} />}
-          {userLoggedIn && (
-            <Route
-              path="/feed"
-              render={props => (
-                <Feed
-                  {...this.props}
-                  loadPosts={getAllPosts}
-                  resetPostId={resetPostId}
-                  posts={posts}
-                />
-              )}
-            />
-          )}
+          <Route
+            path="/home"
+            render={props => (
+              <HomePage {...this.props} userLoggedIn={userLoggedIn} />
+            )}
+          />
+          <Route exact path="/users" component={Users} />
+          <Route
+            path="/feed"
+            render={props => (
+              <Feed
+                {...this.props}
+                loadPosts={getAllPosts}
+                resetPostId={resetPostId}
+                posts={posts}
+              />
+            )}
+          />
         </Switch>
       </div>
     );
   }
 }
-
-
 
 const mapStateToProps = state => {
   return {

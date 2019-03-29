@@ -14,8 +14,7 @@ class Logout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logoutMsg:
-        "You have been successfully logged out! Redirecting you to the landing page."
+      logoutMsg: "Redirecting you to the landing page."
     };
   }
 
@@ -37,6 +36,7 @@ class Logout extends React.Component {
             md={{ size: 4, offset: 4 }}
             lg={{ size: 4, offset: 4 }}
           >
+            <h4>Logging you out...</h4>
             <Card>
               <CardHeader>
                 <CardTitle>Logout</CardTitle>
