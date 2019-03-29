@@ -10,7 +10,7 @@ const MappedUserImages = ({ files }) => {
     }`;
     return (
       <div key={file.Id}>
-        <Row className={styles.CardRow}>
+        <Row className={styles.FlexContainer}>
           <Col sm={{ size: 4 }}>
             <Card className={styles.UserUploadCards}>
               <CardBody>

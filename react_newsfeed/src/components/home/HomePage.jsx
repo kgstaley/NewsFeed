@@ -20,6 +20,12 @@ class HomePage extends React.Component {
     this.loadUserImages();
   };
 
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (this.state.files !== prevState.files) {
+  //     this.loadUserImages();
+  //   }
+  // };
+
   loadUserImages = () => {
     fileService
       .getFiles()
@@ -62,7 +68,7 @@ class HomePage extends React.Component {
         <h3 className={styles.HomePageHeader}>
           Welcome, {user.Firstname} {user.Lastname}
         </h3>
-        <UserUploads />
+        <UserUploads loadUserImages={this.loadUserImages} />
         <MappedUserImages files={this.state.files} />
       </div>
     );

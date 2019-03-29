@@ -19,6 +19,10 @@ class UserUploads extends React.Component {
     };
   }
 
+  loadUserImages = () => {
+    this.props.loadUserImages();
+  };
+
   toggleFilePrompt = () => {
     this.setState({ filePromptOpen: !this.state.filePromptOpen });
   };
@@ -46,7 +50,10 @@ class UserUploads extends React.Component {
               <CardBody>
                 <CardText>Something goes here!</CardText>
                 {filePromptOpen && (
-                  <FileUpload imageUpload={this.imageUpload} />
+                  <FileUpload
+                    imageUpload={this.imageUpload}
+                    loadUserImages={this.loadUserImages}
+                  />
                 )}
                 {this.state.imageUrlArray ? (
                   <div className="img-wrap">
