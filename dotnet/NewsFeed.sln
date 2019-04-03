@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsFeed.Web.Api", "NewsFeed\NewsFeed.Web.Api.csproj", "{E821701F-1926-455D-B7A7-AA22AC9B34E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsFeed", "NewsFeed\NewsFeed.csproj", "{E821701F-1926-455D-B7A7-AA22AC9B34E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsFeed.Data", "NewsFeed.Data\NewsFeed.Data.csproj", "{997567AD-E54F-45AE-98BE-9722EA6D3310}"
 EndProject

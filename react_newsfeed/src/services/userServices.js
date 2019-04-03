@@ -2,11 +2,12 @@ import axios from "axios";
 import * as helpers from "./serviceHelpers";
 
 const prefix = `http://localhost:8080`;
+const netPrefix = `https://localhost:50001/api`;
 
 const registerUser = payload => {
   const config = {
     method: "POST",
-    url: `${prefix}/users/register`,
+    url: `${netPrefix}/users/register`,
     data: payload,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }

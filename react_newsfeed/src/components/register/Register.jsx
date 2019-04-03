@@ -207,7 +207,7 @@ class Register extends React.Component {
               </p>
             )}
             <FormGroup>
-              <Label>Username:</Label>
+              <Label>Password:</Label>
               <Input
                 type="password"
                 name="password"

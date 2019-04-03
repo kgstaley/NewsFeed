@@ -8,4 +8,13 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BCrypt-Core" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsFeed.Data\NewsFeed.Data.csproj" />
+    <ProjectReference Include="..\NewsFeed.Models\NewsFeed.Models.csproj" />
+  </ItemGroup>
+
 </Project>
